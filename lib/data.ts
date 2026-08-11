@@ -31,7 +31,7 @@ export interface Formation {
 }
 
 export const heroStats: HeroStat[] = [
-  { count: 11, label: 'años en TI' },
+  { count: 2, label: 'experiencia en TI' },
   { count: 2, label: 'sistemas construidos' },
   { count: 4, label: 'etapas de aprobación automatizadas' },
 ];
@@ -91,7 +91,7 @@ export const projects: Project[] = [
     tags: ['Next.js', 'Django REST', 'SQL Server', 'LDAP/AD', 'Celery + Redis'],
   },
   {
-    name: 'Sistema de Gestión de Activos Fijos',
+    name: 'Sistema de Inventario/POS',
     description:
       'Producto propio para el control de activos fijos de empresas medianas: registro, depreciación automática y trazabilidad por código QR, construido reutilizando la infraestructura del sistema de viáticos.',
     status: 'dev',
@@ -154,10 +154,10 @@ export interface Skill {
 
 export const skills: Skill[] = [
   { name: 'Python / Django REST Framework', level: 82 },
-  { name: 'SQL Server', level: 78 },
+  { name: 'SQL Server', level: 60 },
   { name: 'React.js / Next.js', level: 72 },
   { name: 'Power BI', level: 65 },
-  { name: 'Celery + Redis', level: 60 },
+  { name: 'Celery + Redis', level: 40 },
 ];
 
 export const languages: Skill[] = [
