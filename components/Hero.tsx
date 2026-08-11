@@ -41,7 +41,7 @@ export default function Hero() {
             <div className="cta-row">
               <a className="btn primary" href="#sistemas">Ver sistemas →</a>
               <a className="btn ghost" href="#contacto">Contactar</a>
-              <a className="btn ghost" href="/cv/wirjin-sanchez-cv.pdf" download>Descargar CV ↓</a>
+              <a className="btn ghost" href="/Wirjin Sanchez (1).pdf" download="Wirjin Sanchez CV.pdf">Descargar CV ↓</a>
             </div>
           </div>
 
