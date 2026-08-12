@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useMemo } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { Stars, Float, PointMaterial, Points } from '@react-three/drei';
 import * as THREE from 'three';
 
@@ -153,6 +153,18 @@ function OrbitalParticles() {
   );
 }
 
+function SideObjects() {
+  const { viewport } = useThree();
+  // Side objects are at x ≈ ±3.5; hide them when the visible world-width is too narrow
+  if (viewport.width < 9) return null;
+  return (
+    <>
+      <FloatingIcosahedron />
+      <FloatingGlobe />
+    </>
+  );
+}
+
 export default function BootScene() {
   return (
     <>
@@ -174,8 +186,7 @@ export default function BootScene() {
       />
 
       <Platform />
-      <FloatingIcosahedron />
-      <FloatingGlobe />
+      <SideObjects />
       <OrbitalParticles />
     </>
   );
