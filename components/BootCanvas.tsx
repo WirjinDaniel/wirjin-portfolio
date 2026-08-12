@@ -6,10 +6,10 @@ import BootScene from './three/BootScene';
 export default function BootCanvas() {
   return (
     <Canvas
-      camera={{ position: [0, 1.8, 7.2], fov: 52 }}
+      camera={{ position: [0, 1.2, 6.5], fov: 48 }}
       gl={{ alpha: false, antialias: true }}
       dpr={[1, 1.5]}
-      style={{ display: 'block' }}
+      style={{ display: 'block', width: '100%', height: '100%' }}
     >
       <BootScene />
     </Canvas>

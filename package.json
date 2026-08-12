@@ -25,6 +25,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.185.4",
+    "@types/webxr": "^0.5.20",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

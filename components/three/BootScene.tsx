@@ -1,8 +1,9 @@
 'use client';
 
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, Suspense } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { Stars, Float, PointMaterial, Points } from '@react-three/drei';
+import EarthGlobe from './EarthGlobe';
 import * as THREE from 'three';
 
 function Platform() {
@@ -11,22 +12,16 @@ function Platform() {
     groupRef.current.rotation.y += delta * 0.07;
   });
   return (
-    <group ref={groupRef} position={[0, -2.3, 0]}>
-      {/* Platform disk */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]}>
-        <cylinderGeometry args={[2.55, 2.65, 0.13, 80]} />
-        <meshStandardMaterial color="#060d1a" metalness={0.96} roughness={0.04} />
-      </mesh>
-
+    <group ref={groupRef} position={[0, -1.6, 0]}>
       {/* Outer glow ring */}
       <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[2.55, 0.032, 16, 140]} />
+        <torusGeometry args={[2.05, 0.026, 16, 140]} />
         <meshStandardMaterial color="#4fd1ae" emissive="#4fd1ae" emissiveIntensity={3} />
       </mesh>
 
       {/* Middle ring */}
       <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[2.05, 0.018, 16, 110]} />
+        <torusGeometry args={[1.65, 0.015, 16, 110]} />
         <meshStandardMaterial
           color="#38bdf8"
           emissive="#38bdf8"
@@ -38,7 +33,7 @@ function Platform() {
 
       {/* Inner ring */}
       <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[1.55, 0.01, 16, 90]} />
+        <torusGeometry args={[1.25, 0.008, 16, 90]} />
         <meshStandardMaterial
           color="#4fd1ae"
           emissive="#4fd1ae"
@@ -50,7 +45,7 @@ function Platform() {
 
       {/* Floor glow plane */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.07, 0]}>
-        <circleGeometry args={[2.4, 60]} />
+        <circleGeometry args={[1.9, 60]} />
         <meshBasicMaterial color="#4fd1ae" transparent opacity={0.04} />
       </mesh>
     </group>
@@ -172,10 +167,11 @@ export default function BootScene() {
     <>
       <color attach="background" args={['#060c18']} />
 
-      <ambientLight intensity={0.06} />
-      <pointLight color="#4fd1ae" intensity={3.5} position={[0, 5, 3]} />
-      <pointLight color="#38bdf8" intensity={1.8} position={[5, 2, 0]} />
-      <pointLight color="#4fd1ae" intensity={0.9} position={[-5, -1, 1]} />
+      <ambientLight intensity={0.4} />
+      <directionalLight color="#ffffff" intensity={0.6} position={[5, 3, 5]} />
+      <pointLight color="#4fd1ae" intensity={0.5} position={[0, 5, 3]} />
+      <pointLight color="#38bdf8" intensity={0.3} position={[5, 2, 0]} />
+      <pointLight color="#4fd1ae" intensity={0.15} position={[-5, -1, 1]} />
 
       <Stars
         radius={28}
@@ -188,6 +184,9 @@ export default function BootScene() {
       />
 
       <Platform />
+      <Suspense fallback={null}>
+        <EarthGlobe />
+      </Suspense>
       <SideObjects />
       <OrbitalParticles />
     </>

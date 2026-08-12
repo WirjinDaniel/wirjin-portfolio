@@ -56,8 +56,8 @@ export default function BootSequence() {
     if (reduceMotion) { setPhase('done'); return; }
 
     const t0 = setTimeout(() => setPhase('active'), 60);
-    const t1 = setTimeout(() => setPhase('exit'), 3100);
-    const t2 = setTimeout(() => setPhase('done'), 3650);
+    const t1 = setTimeout(() => setPhase('exit'), 14000);
+    const t2 = setTimeout(() => setPhase('done'), 14600);
     return () => { clearTimeout(t0); clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
@@ -65,7 +65,7 @@ export default function BootSequence() {
   useEffect(() => {
     if (phase !== 'active') return;
     const start = Date.now();
-    const duration = 3000;
+    const duration = 5000;
     const tick = () => {
       const t = Math.min(1, (Date.now() - start) / duration);
       // Ease: fast start, slow finish
@@ -95,6 +95,7 @@ export default function BootSequence() {
           alignItems: 'center',
           justifyContent: 'center',
           overflow: 'hidden',
+          background: '#0b1220',
           opacity: phase === 'exit' ? 0 : 1,
           transition: phase === 'exit' ? 'opacity 0.55s cubic-bezier(0.4,0,1,1)' : 'none',
         }}
