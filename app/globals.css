@@ -38,6 +38,11 @@ html[data-theme='light'] {
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -46,7 +51,12 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  scrollbar-width: none;
   transition: background 0.3s ease, color 0.3s ease;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 a {
@@ -72,9 +82,10 @@ button:focus-visible {
 /* Background FX */
 .mesh {
   position: fixed;
-  inset: -10%;
+  inset: 0;
   z-index: 0;
   pointer-events: none;
+  transform: scale(1.2);
   background: radial-gradient(600px circle at 15% 20%, rgba(79, 209, 174, 0.1), transparent 60%),
     radial-gradient(500px circle at 85% 65%, rgba(232, 162, 61, 0.07), transparent 60%),
     radial-gradient(700px circle at 50% 100%, rgba(79, 209, 174, 0.06), transparent 60%);
