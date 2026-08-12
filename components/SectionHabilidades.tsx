@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { skills, languages, aptitudes } from '@/lib/data';
 
@@ -15,9 +16,7 @@ function SkillBar({ name, level, delay = 0 }: { name: string; level: number; del
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setTimeout(() => {
-              if (bar) bar.style.width = `${level}%`;
-            }, delay);
+            setTimeout(() => { if (bar) bar.style.width = `${level}%`; }, delay);
             observer.unobserve(entry.target);
           }
         });
@@ -40,6 +39,16 @@ function SkillBar({ name, level, delay = 0 }: { name: string; level: number; del
     </div>
   );
 }
+
+const chipVariants = {
+  hidden: { opacity: 0, scale: 0.82, y: 8 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.38, ease: [0.25, 0.46, 0.45, 0.94] as const },
+  },
+};
 
 export default function SectionHabilidades() {
   const headRef = useScrollReveal();
@@ -67,11 +76,22 @@ export default function SectionHabilidades() {
             ))}
 
             <h4 className="hab-subtitle" style={{ marginTop: 32 }}>Aptitudes</h4>
-            <div className="aptitudes-grid">
+            <motion.div
+              className="aptitudes-grid"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={{
+                hidden: {},
+                show: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
+              }}
+            >
               {aptitudes.map((a) => (
-                <div key={a} className="aptitud-chip">{a}</div>
+                <motion.div key={a} className="aptitud-chip" variants={chipVariants}>
+                  {a}
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

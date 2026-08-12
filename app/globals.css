@@ -1,6 +1,12 @@
-@import "tailwindcss";
+@import "@heroui/styles";
+
+@theme {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
 
 :root {
+  --font-display: var(--font-geist-sans);
   --bg: #0b1220;
   --bg-elev: #121b2e;
   --bg-elev-2: #16223a;
@@ -254,8 +260,6 @@ header.hero {
   flex-direction: column;
   align-items: center;
   gap: 28px;
-  opacity: 0;
-  animation: riseIn 0.7s ease 0.2s forwards;
 }
 
 /* Social links row */
@@ -264,8 +268,6 @@ header.hero {
   flex-direction: column;
   gap: 8px;
   margin-top: 18px;
-  opacity: 0;
-  animation: riseIn 0.7s ease 0.35s forwards;
 }
 
 .social-link {
@@ -299,8 +301,6 @@ header.hero {
   padding: 7px 14px;
   border-radius: 100px;
   color: var(--accent);
-  opacity: 0;
-  animation: riseIn 0.6s ease forwards;
 }
 
 .hero-top {
@@ -324,8 +324,6 @@ header.hero {
   font-weight: 700;
   font-size: 26px;
   color: #08130f;
-  opacity: 0;
-  animation: riseIn 0.6s ease forwards;
   border: 2px solid var(--line);
 }
 
@@ -336,8 +334,6 @@ h1.hero-title {
   line-height: 1.02;
   letter-spacing: -0.015em;
   margin-top: 24px;
-  opacity: 0;
-  animation: riseIn 0.7s ease 0.1s forwards;
 }
 
 h1.hero-title span {
@@ -350,8 +346,6 @@ h1.hero-title span {
   margin-top: 14px;
   max-width: 58ch;
   min-height: 1.6em;
-  opacity: 0;
-  animation: riseIn 0.7s ease 0.2s forwards;
 }
 
 .cursor {
@@ -369,8 +363,6 @@ h1.hero-title span {
   max-width: 60ch;
   font-size: 15.5px;
   color: var(--text);
-  opacity: 0;
-  animation: riseIn 0.7s ease 0.3s forwards;
 }
 
 /* Stats — vertical stack in photo col */
@@ -422,8 +414,6 @@ h1.hero-title span {
   display: flex;
   gap: 14px;
   flex-wrap: wrap;
-  opacity: 0;
-  animation: riseIn 0.7s ease 0.5s forwards;
 }
 
 .btn {
@@ -1141,4 +1131,321 @@ footer {
   }
   .reveal { opacity: 1; transform: none; }
   .card .bar-fill { width: var(--fill) !important; }
+}
+
+/* ─── Nav numbered labels ──────────────────────────────────── */
+.nav-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent);
+  opacity: 0.65;
+  margin-right: 3px;
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s ease;
+}
+
+.nav-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+}
+
+.navlinks a.active .nav-num {
+  opacity: 1;
+  color: var(--bg);
+}
+
+@media (max-width: 680px) {
+  .nav-label {
+    display: none;
+  }
+  .nav-num {
+    margin-right: 0;
+    font-size: 11px;
+  }
+}
+
+/* ─── Project Card redesign ────────────────────────────────── */
+.proj-card {
+  border-radius: 18px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.proj-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(79, 209, 174, 0.35);
+  box-shadow: 0 20px 50px -16px rgba(79, 209, 174, 0.18);
+}
+
+/* Visual header */
+.proj-vis {
+  position: relative;
+  height: 148px;
+  background: var(--bg-elev-2);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.proj-vis-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(79, 209, 174, 0.22) 1px, transparent 1px);
+  background-size: 22px 22px;
+  opacity: 0.55;
+}
+
+.proj-vis-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 60%, rgba(79, 209, 174, 0.18), transparent 60%),
+    radial-gradient(ellipse at 72% 28%, rgba(232, 162, 61, 0.1), transparent 50%);
+}
+
+.proj-vis-icon {
+  position: relative;
+  z-index: 1;
+  font-size: 52px;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.18;
+  filter: drop-shadow(0 0 18px var(--accent));
+  user-select: none;
+}
+
+.proj-vis-status {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  z-index: 2;
+  font-size: 11px;
+}
+
+/* Content body */
+.proj-body {
+  padding: 28px 28px 24px;
+}
+
+.proj-name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.proj-desc {
+  margin-top: 10px;
+  font-size: 14.5px;
+  color: var(--text-soft);
+  max-width: 64ch;
+  line-height: 1.65;
+}
+
+.proj-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 18px;
+}
+
+.proj-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 5px 11px;
+  border-radius: 100px;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+.proj-progress {
+  margin-top: 22px;
+}
+
+.proj-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.proj-progress-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-soft);
+  letter-spacing: 0.02em;
+}
+
+.proj-progress-pct {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* ─── Footer canvas overlay ────────────────────────────────── */
+.foot-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-canvas-wrap {
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.45;
+}
+
+.foot-card-content {
+  position: relative;
+  z-index: 1;
+}
+
+.foot-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+  .footer-canvas-wrap {
+    opacity: 0.25;
+  }
+}
+
+/* ─── Experience 3D Tilt Cards ─────────────────────────────── */
+.exp-tilt-wrap {
+  perspective: 880px;
+  perspective-origin: center center;
+}
+
+.exp-card-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rot-x, 0deg)) rotateY(var(--rot-y, 0deg));
+  transition:
+    transform 0.13s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px;
+  overflow: hidden;
+  cursor: default;
+  will-change: transform;
+}
+
+.exp-card-3d:hover {
+  box-shadow:
+    0 22px 48px -14px rgba(0, 0, 0, 0.55),
+    0 8px 20px rgba(79, 209, 174, 0.07);
+}
+
+.exp-card-3d--open {
+  transform: rotateX(0deg) rotateY(0deg) translateZ(26px) !important;
+  border-color: var(--accent) !important;
+  background: var(--bg-elev-2) !important;
+  box-shadow:
+    0 32px 64px -18px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(79, 209, 174, 0.28),
+    0 0 48px rgba(79, 209, 174, 0.1) !important;
+}
+
+/* Left accent bar when open */
+.exp-card-3d--open::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--accent) 0%, rgba(79, 209, 174, 0.25) 100%);
+  border-radius: 16px 0 0 16px;
+}
+
+/* Icon — rises in Z above card surface */
+.exp-icon-3d {
+  font-size: 36px;
+  line-height: 1;
+  display: block;
+  margin-bottom: 16px;
+  transform: translateZ(26px);
+  transition: transform 0.2s ease;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.45));
+  user-select: none;
+}
+
+.exp-card-3d:hover .exp-icon-3d {
+  transform: translateZ(36px);
+}
+
+.exp-card-3d--open .exp-icon-3d {
+  transform: translateZ(44px);
+}
+
+/* Bullets collapsible */
+.exp-bullets {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 0.42s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.3s ease;
+}
+
+.exp-bullets--open {
+  max-height: 340px;
+  opacity: 1;
+}
+
+.exp-bullets ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.exp-bullets li {
+  font-size: 13.5px;
+  color: var(--text-soft);
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.55;
+}
+
+.exp-bullets li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Reduced motion: disable tilt */
+@media (prefers-reduced-motion: reduce) {
+  .exp-card-3d {
+    transform: none !important;
+    transition: border-color 0.2s ease, background 0.2s ease !important;
+  }
+  .exp-icon-3d {
+    transform: none !important;
+  }
 }

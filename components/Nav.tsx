@@ -1,15 +1,16 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
 
 const navItems = [
-  { href: '#perfil', label: 'Perfil' },
-  { href: '#experiencia', label: 'Experiencia' },
-  { href: '#sistemas', label: 'Sistemas' },
-  { href: '#habilidades', label: 'Habilidades' },
-  { href: '#stack', label: 'Stack' },
-  { href: '#contacto', label: 'Contacto' },
+  { href: '#perfil',      label: 'Perfil',      num: '01' },
+  { href: '#experiencia', label: 'Experiencia',  num: '02' },
+  { href: '#sistemas',    label: 'Sistemas',     num: '03' },
+  { href: '#habilidades', label: 'Habilidades',  num: '04' },
+  { href: '#stack',       label: 'Stack',        num: '05' },
+  { href: '#contacto',    label: 'Contacto',     num: '06' },
 ];
 
 export default function Nav() {
@@ -39,7 +40,11 @@ export default function Nav() {
   }, []);
 
   return (
-    <nav>
+    <motion.nav
+      initial={{ opacity: 0, y: -12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
+    >
       <div className="wrap nav-inner">
         <div className="logo">
           <span className="dot" />
@@ -51,17 +56,16 @@ export default function Nav() {
               <a
                 key={item.href}
                 href={item.href}
-                ref={(el) => {
-                  if (el) linksRef.current[i] = el;
-                }}
+                ref={(el) => { if (el) linksRef.current[i] = el; }}
               >
-                {item.label}
+                <span className="nav-num">{item.num}</span>
+                <span className="nav-label">{item.label}</span>
               </a>
             ))}
           </div>
           <ThemeToggle />
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }

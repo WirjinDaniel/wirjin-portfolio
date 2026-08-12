@@ -1,0 +1,107 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* ── Badge ───────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.22);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: 'Courier New', 'Menlo', 'Monaco', monospace;
+  letter-spacing: 0.03em;
+  margin-bottom: 30px;
+  user-select: none;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  flex-shrink: 0;
+  animation: pulseDot 2.2s ease-out infinite;
+}
+
+/* ── Name ────────────────────────────────────── */
+.heroName {
+  perspective: 650px;
+  perspective-origin: 50% 45%;
+  display: inline-block;
+}
+
+.nameRow {
+  display: flex;
+  line-height: 1;
+}
+
+.letter {
+  display: inline-block;
+  font-size: clamp(52px, 8vw, 96px);
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  transform-style: preserve-3d;
+  will-change: transform, opacity, filter;
+  cursor: default;
+  user-select: none;
+}
+
+.green {
+  color: #10b981;
+}
+
+/* Applied by JS to trigger a single flip cycle */
+.flipping {
+  animation: flipX 620ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ── Subtitle ────────────────────────────────── */
+.subtitle {
+  margin-top: 18px;
+  font-size: clamp(11px, 1.4vw, 13.5px);
+  color: rgba(255, 255, 255, 0.3);
+  font-family: 'Courier New', 'Menlo', 'Monaco', monospace;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  opacity: 0;
+}
+
+.subtitleVisible {
+  animation: fadeIn 0.6s ease 1.4s forwards;
+}
+
+/* ── Keyframes ───────────────────────────────── */
+@keyframes flipX {
+  0%   { transform: rotateX(0deg);   opacity: 1;    filter: brightness(1);    }
+  20%  { transform: rotateX(72deg);  opacity: 0.75; filter: brightness(1.35); }
+  40%  { transform: rotateX(144deg); opacity: 0.3;  filter: brightness(0.7);  }
+  60%  { transform: rotateX(216deg); opacity: 0.3;  filter: brightness(0.7);  }
+  80%  { transform: rotateX(288deg); opacity: 0.8;  filter: brightness(1.4);  }
+  100% { transform: rotateX(360deg); opacity: 1;    filter: brightness(1);    }
+}
+
+@keyframes pulseDot {
+  0%   { box-shadow: 0 0 0 0   rgba(16, 185, 129, 0.55); }
+  65%  { box-shadow: 0 0 0 7px rgba(16, 185, 129, 0);    }
+  100% { box-shadow: 0 0 0 0   rgba(16, 185, 129, 0);    }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .letter   { animation: none !important; }
+  .flipping { animation: none !important; }
+  .dot      { animation: none !important; }
+  .subtitle, .subtitleVisible { animation: none !important; opacity: 1; }
+}
