@@ -91,7 +91,13 @@ export default function Hero() {
             </motion.div>
             <motion.p className="role" variants={riseUp}>
               {displayed}
-              <span className="cursor" />
+              <span
+                className="cursor"
+                style={{
+                  opacity: done ? 0 : 1,
+                  transition: 'opacity 0.4s ease',
+                }}
+              />
             </motion.p>
             <motion.p className="tagline" variants={riseUp}>
               Diseño y mantengo sistemas institucionales de flujo controlado: solicitudes,
