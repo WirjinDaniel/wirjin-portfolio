@@ -57,7 +57,7 @@ function Platform() {
   );
 }
 
-function FloatingIcosahedron() {
+function FloatingIcosahedron({ x, sc }: { x: number; sc: number }) {
   const meshRef = useRef<THREE.Mesh>(null!);
   useFrame((_, delta) => {
     meshRef.current.rotation.y += delta * 0.3;
@@ -65,7 +65,7 @@ function FloatingIcosahedron() {
   });
   return (
     <Float speed={1.3} floatIntensity={0.75} rotationIntensity={0}>
-      <mesh ref={meshRef} position={[-3.5, 0.3, -0.5]}>
+      <mesh ref={meshRef} position={[x, 0.3, -0.5]} scale={sc}>
         <icosahedronGeometry args={[0.92, 0]} />
         <meshBasicMaterial color="#4fd1ae" wireframe transparent opacity={0.48} />
       </mesh>
@@ -73,7 +73,7 @@ function FloatingIcosahedron() {
   );
 }
 
-function FloatingGlobe() {
+function FloatingGlobe({ x, sc }: { x: number; sc: number }) {
   const outerRef = useRef<THREE.Mesh>(null!);
   const dotsRef = useRef<THREE.Points>(null!);
 
@@ -99,7 +99,7 @@ function FloatingGlobe() {
 
   return (
     <Float speed={1.1} floatIntensity={0.65} rotationIntensity={0}>
-      <group position={[3.6, 0.15, -0.5]}>
+      <group position={[x, 0.15, -0.5]} scale={sc}>
         <mesh ref={outerRef}>
           <icosahedronGeometry args={[1, 2]} />
           <meshBasicMaterial color="#38bdf8" wireframe transparent opacity={0.28} />
@@ -155,12 +155,14 @@ function OrbitalParticles() {
 
 function SideObjects() {
   const { viewport } = useThree();
-  // Side objects are at x ≈ ±3.5; hide them when the visible world-width is too narrow
-  if (viewport.width < 9) return null;
+  // xOff: place objects at 68% of half-width, clamped between 1.2 (mobile) and 3.5 (desktop)
+  const xOff = Math.min(3.5, Math.max(1.2, (viewport.width / 2) * 0.68));
+  // sc: scale proportionally so they never appear larger than intended
+  const sc   = Math.min(1, Math.max(0.38, xOff / 3.5));
   return (
     <>
-      <FloatingIcosahedron />
-      <FloatingGlobe />
+      <FloatingIcosahedron x={-xOff} sc={sc} />
+      <FloatingGlobe       x={ xOff} sc={sc} />
     </>
   );
 }
