@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useMemo, Suspense } from 'react';
+import { useRef, useMemo, Suspense, useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { Stars, Float, PointMaterial, Points } from '@react-three/drei';
 import EarthGlobe from './EarthGlobe';
@@ -12,7 +12,7 @@ function Platform() {
     groupRef.current.rotation.y += delta * 0.07;
   });
   return (
-    <group ref={groupRef} position={[0, -1.6, 0]}>
+    <group ref={groupRef} position={[0, -0.8, 0]}>
       {/* Outer glow ring */}
       <mesh rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[2.05, 0.026, 16, 140]} />
@@ -52,7 +52,7 @@ function Platform() {
   );
 }
 
-function FloatingIcosahedron({ x, sc }: { x: number; sc: number }) {
+function FloatingIcosahedron({ x, y, sc }: { x: number; y: number; sc: number }) {
   const meshRef = useRef<THREE.Mesh>(null!);
   useFrame((_, delta) => {
     meshRef.current.rotation.y += delta * 0.3;
@@ -60,7 +60,7 @@ function FloatingIcosahedron({ x, sc }: { x: number; sc: number }) {
   });
   return (
     <Float speed={1.3} floatIntensity={0.75} rotationIntensity={0}>
-      <mesh ref={meshRef} position={[x, 0.3, -0.5]} scale={sc}>
+      <mesh ref={meshRef} position={[x, y, -0.5]} scale={sc}>
         <icosahedronGeometry args={[0.92, 0]} />
         <meshBasicMaterial color="#4fd1ae" wireframe transparent opacity={0.48} />
       </mesh>
@@ -68,7 +68,7 @@ function FloatingIcosahedron({ x, sc }: { x: number; sc: number }) {
   );
 }
 
-function FloatingGlobe({ x, sc }: { x: number; sc: number }) {
+function FloatingGlobe({ x, y, sc }: { x: number; y: number; sc: number }) {
   const outerRef = useRef<THREE.Mesh>(null!);
   const dotsRef = useRef<THREE.Points>(null!);
 
@@ -94,7 +94,7 @@ function FloatingGlobe({ x, sc }: { x: number; sc: number }) {
 
   return (
     <Float speed={1.1} floatIntensity={0.65} rotationIntensity={0}>
-      <group position={[x, 0.15, -0.5]} scale={sc}>
+      <group position={[x, y, -0.5]} scale={sc}>
         <mesh ref={outerRef}>
           <icosahedronGeometry args={[1, 2]} />
           <meshBasicMaterial color="#38bdf8" wireframe transparent opacity={0.28} />
@@ -148,16 +148,43 @@ function OrbitalParticles() {
   );
 }
 
+function CameraAdapter() {
+  const camera = useThree((s) => s.camera);
+  const aspect = useThree((s) => s.viewport.aspect);
+
+  useEffect(() => {
+    const cam = camera as THREE.PerspectiveCamera;
+    if (!cam.isPerspectiveCamera) return;
+    const mobile = aspect < 0.85;
+    cam.fov = mobile ? 60 : 48;
+    cam.position.set(0, mobile ? 0.0 : 0.3, mobile ? 11.5 : 7.5);
+    cam.updateProjectionMatrix();
+    cam.lookAt(0, 0, 0);
+  }, [camera, aspect]);
+
+  return null;
+}
+
 function SideObjects() {
   const { viewport } = useThree();
-  // xOff: place objects at 68% of half-width, clamped between 1.2 (mobile) and 3.5 (desktop)
-  const xOff = Math.min(3.5, Math.max(1.2, (viewport.width / 2) * 0.68));
-  // sc: scale proportionally so they never appear larger than intended
+  const mobile = viewport.aspect < 0.85;
+
+  if (mobile) {
+    // Portrait: beside the avatar circle, at globe-top level
+    return (
+      <>
+        <FloatingIcosahedron x={-1.85} y={0.7} sc={0.48} />
+        <FloatingGlobe       x={ 1.85} y={0.7} sc={0.48} />
+      </>
+    );
+  }
+
+  const xOff = Math.min(3.5, Math.max(2.2, (viewport.width / 2) * 0.68));
   const sc   = Math.min(1, Math.max(0.38, xOff / 3.5));
   return (
     <>
-      <FloatingIcosahedron x={-xOff} sc={sc} />
-      <FloatingGlobe       x={ xOff} sc={sc} />
+      <FloatingIcosahedron x={-xOff} y={0.3}  sc={sc} />
+      <FloatingGlobe       x={ xOff} y={0.15} sc={sc} />
     </>
   );
 }
@@ -165,13 +192,17 @@ function SideObjects() {
 export default function BootScene() {
   return (
     <>
+      <CameraAdapter />
       <color attach="background" args={['#060c18']} />
 
-      <ambientLight intensity={0.4} />
-      <directionalLight color="#ffffff" intensity={0.6} position={[5, 3, 5]} />
-      <pointLight color="#4fd1ae" intensity={0.5} position={[0, 5, 3]} />
-      <pointLight color="#38bdf8" intensity={0.3} position={[5, 2, 0]} />
-      <pointLight color="#4fd1ae" intensity={0.15} position={[-5, -1, 1]} />
+      {/* Sky azul espacial + suelo oscuro: da color natural al lado de sombra */}
+      <hemisphereLight args={['#0d2347', '#050d18', 0.45]} />
+      {/* Sol: lado iluminado vibrante */}
+      <directionalLight color="#fff8ee" intensity={1.4} position={[5, 3, 5]} />
+      {/* Fill azul desde detrás: suaviza el borde día/noche */}
+      <pointLight color="#1a3d7a" intensity={0.18} position={[-6, 0, -4]} />
+      <pointLight color="#4fd1ae" intensity={0.28} position={[0, 5, 3]} />
+      <pointLight color="#38bdf8" intensity={0.15} position={[5, 2, 0]} />
 
       <Stars
         radius={28}

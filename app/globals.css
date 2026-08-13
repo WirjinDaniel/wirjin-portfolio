@@ -1192,7 +1192,7 @@ footer {
 /* Visual header */
 .proj-vis {
   position: relative;
-  height: 148px;
+  height: 210px;
   background: var(--bg-elev-2);
   overflow: hidden;
   display: flex;
@@ -1225,6 +1225,29 @@ footer {
   opacity: 0.18;
   filter: drop-shadow(0 0 18px var(--accent));
   user-select: none;
+}
+
+.proj-vis-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.proj-vis-img img {
+  transition: transform 0.5s ease;
+}
+
+.proj-card:hover .proj-vis-img img {
+  transform: scale(1.05);
+}
+
+.proj-vis-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to bottom, rgba(8, 12, 20, 0.08) 0%, rgba(8, 12, 20, 0.72) 100%);
+  pointer-events: none;
 }
 
 .proj-vis-status {

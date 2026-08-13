@@ -13,6 +13,7 @@ export interface Project {
   fill: number;
   fillLabel: string;
   tags: string[];
+  image?: string;
 }
 
 export interface StackGroup {
@@ -89,6 +90,7 @@ export const projects: Project[] = [
     fill: 96,
     fillLabel: 'Adopción institucional',
     tags: ['Next.js', 'Django REST', 'SQL Server', 'LDAP/AD', 'Celery + Redis'],
+    image: '/Viaticos dashordad .png',
   },
   {
     name: 'Sistema de Inventario/POS',
@@ -99,6 +101,7 @@ export const projects: Project[] = [
     fill: 55,
     fillLabel: 'Avance del roadmap',
     tags: ['Django REST', 'Celery Beat', 'QR', 'Producto multi-cliente'],
+    image: '/investario.png',
   },
 ];
 

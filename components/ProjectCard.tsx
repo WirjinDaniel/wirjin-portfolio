@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import type { Project } from '@/lib/data';
 
@@ -44,9 +45,26 @@ export default function ProjectCard({ project }: { project: Project }) {
     >
       {/* Visual header */}
       <div className="proj-vis">
-        <div className="proj-vis-grid" />
-        <div className="proj-vis-glow" />
-        <div className="proj-vis-icon">{icon}</div>
+        {project.image ? (
+          <>
+            <div className="proj-vis-img">
+              <Image
+                src={project.image}
+                alt={`${project.name} dashboard`}
+                fill
+                style={{ objectFit: 'cover', objectPosition: 'top center' }}
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+            <div className="proj-vis-overlay" />
+          </>
+        ) : (
+          <>
+            <div className="proj-vis-grid" />
+            <div className="proj-vis-glow" />
+            <div className="proj-vis-icon">{icon}</div>
+          </>
+        )}
         <span className={`proj-vis-status status ${project.status}`}>
           <span className="sdot" />
           {project.statusLabel}

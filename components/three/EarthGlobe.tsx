@@ -14,8 +14,10 @@ export default function EarthGlobe() {
   const earthRef  = useRef<THREE.Mesh>(null!);
   const cloudsRef = useRef<THREE.Mesh>(null!);
 
-  const earthTex  = useTexture('/earth-blue-marble.jpg');
-  const cloudsTex = useTexture('/clouds.png');
+  const [earthTex, cloudsTex] = useTexture([
+    '/earth-blue-marble.jpg',
+    '/clouds.png',
+  ]);
 
   earthTex.colorSpace      = THREE.SRGBColorSpace;
   earthTex.anisotropy      = 16;
@@ -34,10 +36,14 @@ export default function EarthGlobe() {
   });
 
   return (
-    <group position={[0, -1.6, 0]}>
+    <group position={[0, -0.8, 0]}>
       <mesh ref={earthRef} rotation={[THREE.MathUtils.degToRad(-30), 1.1, 0]}>
         <sphereGeometry args={[GLOBE_RADIUS, 96, 96]} />
-        <meshBasicMaterial map={earthTex} />
+        <meshStandardMaterial
+          map={earthTex}
+          roughness={0.78}
+          metalness={0.0}
+        />
       </mesh>
 
       <mesh ref={cloudsRef}>
@@ -46,19 +52,25 @@ export default function EarthGlobe() {
           color="#ffffff"
           alphaMap={cloudsTex}
           transparent
-          opacity={0.45}
+          opacity={0.08}
           depthWrite={false}
         />
       </mesh>
 
+      {/* Atmospheric haze — blue scatter */}
       <mesh>
-        <sphereGeometry args={[GLOBE_RADIUS * 1.04, 32, 32]} />
-        <meshBasicMaterial color="#4fd1ae" transparent opacity={0.07} side={THREE.BackSide} />
+        <sphereGeometry args={[GLOBE_RADIUS * 1.035, 32, 32]} />
+        <meshBasicMaterial color="#1a5fa8" transparent opacity={0.11} side={THREE.BackSide} />
       </mesh>
 
       <mesh>
-        <sphereGeometry args={[GLOBE_RADIUS * 1.075, 32, 32]} />
-        <meshBasicMaterial color="#38bdf8" transparent opacity={0.03} side={THREE.BackSide} />
+        <sphereGeometry args={[GLOBE_RADIUS * 1.07, 32, 32]} />
+        <meshBasicMaterial color="#2a6fbe" transparent opacity={0.05} side={THREE.BackSide} />
+      </mesh>
+
+      <mesh>
+        <sphereGeometry args={[GLOBE_RADIUS * 1.12, 32, 32]} />
+        <meshBasicMaterial color="#4080cc" transparent opacity={0.018} side={THREE.BackSide} />
       </mesh>
     </group>
   );

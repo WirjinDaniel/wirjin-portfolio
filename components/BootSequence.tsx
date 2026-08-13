@@ -10,9 +10,13 @@ const css = `
   from { opacity: 0; }
   to   { opacity: 1; }
 }
-@keyframes boot-photo-in {
-  from { opacity: 0; transform: scale(0.88) translateY(10px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
+@keyframes boot-avatar-drop {
+  0%   { opacity: 0; transform: translateY(-90px); }
+  42%  { opacity: 1; }
+  62%  { transform: translateY(12px); }
+  78%  { transform: translateY(-6px); }
+  90%  { transform: translateY(3px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 @keyframes boot-text-in {
   from { opacity: 0; transform: translateY(14px); }
@@ -42,6 +46,24 @@ const css = `
   0%, 100% { box-shadow: 0 0 0 0 rgba(79,209,174,0), 0 0 22px rgba(79,209,174,0.2); }
   50%       { box-shadow: 0 0 0 6px rgba(79,209,174,0.12), 0 0 40px rgba(79,209,174,0.35); }
 }
+.boot-photo {
+  width: 148px; height: 148px;
+  border-radius: 50%; overflow: hidden;
+  border: 2px solid rgba(79,209,174,0.55);
+  background: #0d1a2a; flex-shrink: 0;
+}
+.boot-content-col {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 0;
+  margin-top: 20px;
+}
+.boot-progress-bar { width: 220px; }
+@media (max-width: 640px) {
+  .boot-photo { width: 110px; height: 110px; }
+  .boot-content-col { margin-top: -40px; }
+  .boot-progress-bar { width: min(220px, 82vw); }
+}
 `;
 
 const DOT_COUNT = 6;
@@ -56,8 +78,8 @@ export default function BootSequence() {
     if (reduceMotion) { setPhase('done'); return; }
 
     const t0 = setTimeout(() => setPhase('active'), 60);
-    const t1 = setTimeout(() => setPhase('exit'), 14000);
-    const t2 = setTimeout(() => setPhase('done'), 14600);
+    const t1 = setTimeout(() => setPhase('exit'), 4000);
+    const t2 = setTimeout(() => setPhase('done'), 4600);
     return () => { clearTimeout(t0); clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
@@ -65,7 +87,7 @@ export default function BootSequence() {
   useEffect(() => {
     if (phase !== 'active') return;
     const start = Date.now();
-    const duration = 5000;
+    const duration = 3200;
     const tick = () => {
       const t = Math.min(1, (Date.now() - start) / duration);
       // Ease: fast start, slow finish
@@ -113,29 +135,13 @@ export default function BootSequence() {
         </div>
 
         {/* Central content overlay */}
-        <div
-          style={{
-            position: 'relative',
-            zIndex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: 0,
-            marginTop: '-60px',
-          }}
-        >
+        <div className="boot-content-col">
           {/* Photo */}
           <div
+            className="boot-photo"
             style={{
-              width: 148,
-              height: 148,
-              borderRadius: '50%',
-              overflow: 'hidden',
-              border: '2px solid rgba(79,209,174,0.55)',
-              background: '#0d1a2a',
-              flexShrink: 0,
               animation: active
-                ? 'boot-photo-in 0.7s cubic-bezier(0.25,0.46,0.45,0.94) 0.2s both, boot-photo-ring-pulse 2.5s ease-in-out 0.9s infinite'
+                ? 'boot-avatar-drop 1.05s ease-out 0.3s both, boot-photo-ring-pulse 2.5s ease-in-out 1.5s infinite'
                 : 'none',
               opacity: 0,
             }}
@@ -176,28 +182,30 @@ export default function BootSequence() {
               style={{
                 fontFamily: 'var(--font-display, sans-serif)',
                 fontSize: 'clamp(20px, 3vw, 26px)',
-                fontWeight: 700,
+                fontWeight: 800,
                 letterSpacing: '-0.01em',
-                color: '#e7ecf3',
+                color: '#ffffff',
                 margin: 0,
                 animation: active ? 'boot-text-in 0.6s ease 0.45s both' : 'none',
                 opacity: 0,
                 textAlign: 'center',
+                textShadow: '0 0 18px rgba(0,0,0,1), 0 2px 8px rgba(0,0,0,0.95), 0 0 40px rgba(0,0,0,0.8)',
               }}
             >
               Building{' '}
-              <span style={{ color: '#4fd1ae' }}>digital</span>
+              <span style={{ color: '#4fd1ae', textShadow: '0 0 18px rgba(0,0,0,1), 0 0 12px rgba(79,209,174,0.4)' }}>digital</span>
               {' '}experiences
             </h1>
             <p
               style={{
                 fontFamily: 'var(--font-mono, monospace)',
                 fontSize: 12,
-                color: '#8b96aa',
+                color: '#c8d4e0',
                 letterSpacing: '0.05em',
                 margin: 0,
                 animation: active ? 'boot-sub-in 0.6s ease 0.6s both' : 'none',
                 opacity: 0,
+                textShadow: '0 0 14px rgba(0,0,0,1), 0 1px 6px rgba(0,0,0,0.95)',
               }}
             >
               Loading portfolio...
@@ -232,8 +240,8 @@ export default function BootSequence() {
 
           {/* Progress bar */}
           <div
+            className="boot-progress-bar"
             style={{
-              width: 220,
               marginTop: 14,
               animation: active ? 'boot-bar-in 0.4s ease 0.8s both' : 'none',
               opacity: 0,
@@ -267,6 +275,7 @@ export default function BootSequence() {
                 color: '#4fd1ae',
                 marginTop: 8,
                 letterSpacing: '0.04em',
+                textShadow: '0 0 10px rgba(0,0,0,1)',
               }}
             >
               {progress}%
