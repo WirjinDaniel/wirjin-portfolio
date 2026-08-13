@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
@@ -57,13 +57,12 @@ export default function SectionHabilidades() {
     <section id="habilidades">
       <div className="wrap">
         <div className="sec-head reveal" ref={headRef as React.Ref<HTMLDivElement>}>
-          <span className="tag">04</span>
           <h2>Habilidades</h2>
         </div>
 
         <div className="hab-grid">
           <div className="hab-col">
-            <h4 className="hab-subtitle">Tecnologías</h4>
+            <h4 className="hab-subtitle">TecnologÃ­as</h4>
             {skills.map((s, i) => (
               <SkillBar key={s.name} name={s.name} level={s.level} delay={i * 80} />
             ))}

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { formation } from '@/lib/data';
@@ -12,20 +12,19 @@ export default function SectionFormacion() {
     <section id="formacion">
       <div className="wrap">
         <div className="sec-head reveal" ref={headRef as React.Ref<HTMLDivElement>}>
-          <span className="tag">06</span>
-          <h2>Formación</h2>
+          <h2>FormaciÃ³n</h2>
         </div>
         <div className="formacion-grid">
           <div className="reveal" ref={eduRef as React.Ref<HTMLDivElement>}>
-            <h4>Educación</h4>
+            <h4>EducaciÃ³n</h4>
             <ul>
               {formation.education.map((item, i) => {
-                const [bold, rest] = item.includes('—') ? item.split(' — ') : [null, item];
+                const [bold, rest] = item.includes('â€”') ? item.split(' â€” ') : [null, item];
                 return (
                   <li key={i}>
                     {bold ? (
                       <>
-                        <b>{bold}</b> — {rest}
+                        <b>{bold}</b> â€” {rest}
                       </>
                     ) : (
                       item
@@ -39,12 +38,12 @@ export default function SectionFormacion() {
             <h4>Capacitaciones</h4>
             <ul>
               {formation.training.map((item, i) => {
-                const [bold, rest] = item.includes(' — ') ? item.split(' — ') : [null, item];
+                const [bold, rest] = item.includes(' â€” ') ? item.split(' â€” ') : [null, item];
                 return (
                   <li key={i}>
                     {bold ? (
                       <>
-                        <b>{bold}</b> — {rest}
+                        <b>{bold}</b> â€” {rest}
                       </>
                     ) : (
                       item

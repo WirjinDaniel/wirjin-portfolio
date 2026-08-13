@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { stackGroups } from '@/lib/data';
@@ -10,8 +10,7 @@ export default function SectionStack() {
     <section id="stack">
       <div className="wrap">
         <div className="sec-head reveal" ref={headRef as React.Ref<HTMLDivElement>}>
-          <span className="tag">05</span>
-          <h2>Stack técnico</h2>
+          <h2>Stack tÃ©cnico</h2>
         </div>
         <div className="stack-grid">
           {stackGroups.map((group) => (

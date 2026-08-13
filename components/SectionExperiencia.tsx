@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
@@ -63,7 +63,7 @@ function ExpCard3D({
         onMouseMove={handleMouseMove}
         onMouseLeave={resetTilt}
       >
-        {/* Icon — floats in Z */}
+        {/* Icon â€” floats in Z */}
         <span className="exp-icon-3d" aria-hidden>
           {icon}
         </span>
@@ -88,7 +88,7 @@ function ExpCard3D({
 
         {/* Toggle button */}
         <button className="exp-learn-more" onClick={toggle} aria-expanded={open}>
-          {open ? 'CERRAR ←' : 'VER MÁS →'}
+          {open ? 'CERRAR â†' : 'VER MÃS â†’'}
         </button>
       </div>
     </motion.div>
@@ -102,7 +102,6 @@ export default function SectionExperiencia() {
     <section id="experiencia">
       <div className="wrap">
         <div className="sec-head reveal" ref={headRef as React.Ref<HTMLDivElement>}>
-          <span className="tag">02</span>
           <h2>Experiencia laboral</h2>
         </div>
         <div className="exp-grid">

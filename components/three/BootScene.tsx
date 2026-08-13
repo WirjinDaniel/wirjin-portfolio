@@ -195,14 +195,12 @@ export default function BootScene() {
       <CameraAdapter />
       <color attach="background" args={['#060c18']} />
 
-      {/* Sky azul espacial + suelo oscuro: da color natural al lado de sombra */}
-      <hemisphereLight args={['#0d2347', '#050d18', 0.45]} />
-      {/* Sol: lado iluminado vibrante */}
-      <directionalLight color="#fff8ee" intensity={1.7} position={[5, 3, 5]} />
-      {/* Fill azul desde detrás: suaviza el borde día/noche */}
-      <pointLight color="#1a3d7a" intensity={0.18} position={[-6, 0, -4]} />
-      <pointLight color="#4fd1ae" intensity={0.28} position={[0, 5, 3]} />
-      <pointLight color="#38bdf8" intensity={0.15} position={[5, 2, 0]} />
+      {/* Ambient mínimo — lado nocturno azul oscuro, no negro */}
+      <ambientLight intensity={0.15} />
+      {/* Sol principal */}
+      <directionalLight color="#fff5e0" intensity={2.2} position={[5, 3, 5]} />
+      {/* Fill suave desde atrás para el lado nocturno */}
+      <pointLight color="#1a3060" intensity={0.6} position={[-6, -1, -4]} />
 
       <Stars
         radius={28}

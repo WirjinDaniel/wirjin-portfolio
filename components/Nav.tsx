@@ -58,7 +58,6 @@ export default function Nav() {
                 href={item.href}
                 ref={(el) => { if (el) linksRef.current[i] = el; }}
               >
-                <span className="nav-num">{item.num}</span>
                 <span className="nav-label">{item.label}</span>
               </a>
             ))}
