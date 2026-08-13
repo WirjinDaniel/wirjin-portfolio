@@ -52,7 +52,7 @@ export default function EarthGlobe() {
           color="#ffffff"
           alphaMap={cloudsTex}
           transparent
-          opacity={0.08}
+          opacity={0.10}
           depthWrite={false}
         />
       </mesh>

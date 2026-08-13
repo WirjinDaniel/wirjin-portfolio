@@ -198,7 +198,7 @@ export default function BootScene() {
       {/* Sky azul espacial + suelo oscuro: da color natural al lado de sombra */}
       <hemisphereLight args={['#0d2347', '#050d18', 0.45]} />
       {/* Sol: lado iluminado vibrante */}
-      <directionalLight color="#fff8ee" intensity={1.4} position={[5, 3, 5]} />
+      <directionalLight color="#fff8ee" intensity={1.7} position={[5, 3, 5]} />
       {/* Fill azul desde detrás: suaviza el borde día/noche */}
       <pointLight color="#1a3d7a" intensity={0.18} position={[-6, 0, -4]} />
       <pointLight color="#4fd1ae" intensity={0.28} position={[0, 5, 3]} />
