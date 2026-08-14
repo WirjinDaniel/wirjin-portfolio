@@ -10,7 +10,7 @@ export default function SectionStack() {
     <section id="stack">
       <div className="wrap">
         <div className="sec-head reveal" ref={headRef as React.Ref<HTMLDivElement>}>
-          <h2>Stack tÃ©cnico</h2>
+          <h2>Tecnologías</h2>
         </div>
         <div className="stack-grid">
           {stackGroups.map((group) => (

@@ -15,7 +15,7 @@ export default function SectionSistemas() {
           <h2>Estado de sistemas</h2>
         </div>
         <span className="badge-note reveal" ref={badgeRef as React.Ref<HTMLSpanElement>}>
-          âš  Acceso restringido. CÃ³digo y repositorios no pÃºblicos por polÃ­ticas de confidencialidad.
+          🔐 Acceso restringido. Código y repositorios no públicos por políticas de confidencialidad.
         </span>
         <div className="cards" style={{ marginTop: 20 }}>
           {projects.map((p) => (
