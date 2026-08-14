@@ -27,7 +27,11 @@ export default function Nav() {
           if (entry.isIntersecting) {
             const id = '#' + entry.target.id;
             linksRef.current.forEach((link) => {
-              link.classList.toggle('active', link.getAttribute('href') === id);
+              const isActive = link.getAttribute('href') === id;
+              link.classList.toggle('active', isActive);
+              if (isActive) {
+                link.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+              }
             });
           }
         });
@@ -50,20 +54,18 @@ export default function Nav() {
           <span className="dot" />
           wirjin.sys
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <div className="navlinks">
-            {navItems.map((item, i) => (
-              <a
-                key={item.href}
-                href={item.href}
-                ref={(el) => { if (el) linksRef.current[i] = el; }}
-              >
-                <span className="nav-label">{item.label}</span>
-              </a>
-            ))}
-          </div>
-          <ThemeToggle />
+        <div className="navlinks">
+          {navItems.map((item, i) => (
+            <a
+              key={item.href}
+              href={item.href}
+              ref={(el) => { if (el) linksRef.current[i] = el; }}
+            >
+              <span className="nav-label">{item.label}</span>
+            </a>
+          ))}
         </div>
+        <ThemeToggle />
       </div>
     </motion.nav>
   );
