@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
@@ -63,7 +63,7 @@ function ExpCard3D({
         onMouseMove={handleMouseMove}
         onMouseLeave={resetTilt}
       >
-        {/* Icon â€” floats in Z */}
+        {/* Icon — floats in Z */}
         <span className="exp-icon-3d" aria-hidden>
           {icon}
         </span>
@@ -88,7 +88,7 @@ function ExpCard3D({
 
         {/* Toggle button */}
         <button className="exp-learn-more" onClick={toggle} aria-expanded={open}>
-          {open ? 'CERRAR â†' : 'VER MÃS â†’'}
+          {open ? 'CERRAR ←' : 'VER MÁS →'}
         </button>
       </div>
     </motion.div>
