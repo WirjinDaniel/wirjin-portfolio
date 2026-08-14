@@ -8,7 +8,7 @@ import { useHeroParallax } from '@/hooks/useHeroParallax';
 import { heroStats, roleText } from '@/lib/data';
 import HeroName from './HeroName';
 
-const HeroCanvas = dynamic(() => import('./HeroCanvas'), { ssr: false });
+const HeroGlobe = dynamic(() => import('./HeroGlobe'), { ssr: false });
 
 const riseUp = {
   hidden: { opacity: 0, y: 18 },
@@ -54,11 +54,11 @@ export default function Hero() {
       className="hero"
       style={{ position: 'relative', overflow: 'hidden' }}
     >
-      {/* 3D canvas — absolute behind content */}
+      {/* Globo terrestre girando — capa más al fondo */}
       <motion.div
         initial={shouldReduceMotion ? false : { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.6, ease: 'easeOut' }}
+        animate={{ opacity: 0.85 }}
+        transition={{ duration: 2.0, ease: 'easeOut' }}
         style={{
           position: 'absolute',
           inset: 0,
@@ -66,8 +66,9 @@ export default function Hero() {
           pointerEvents: 'none',
         }}
       >
-        <HeroCanvas />
+        <HeroGlobe />
       </motion.div>
+
 
       {/* Content layer */}
       <div className="wrap" style={{ position: 'relative', zIndex: 1 }}>
