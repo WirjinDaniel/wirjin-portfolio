@@ -252,7 +252,7 @@ export default function Projects() {
         </div>
 
         {/* Bottom stats strip */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
+        <div className="projects-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
           {bottomStats.map(({ icon: Icon, value, label }, i) => (
             <motion.div
               key={value}

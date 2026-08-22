@@ -357,7 +357,7 @@ export default function Skills() {
           {/* Bases de datos */}
           <div>
             <CatHeader icon={Database} label="BASES DE DATOS & HERRAMIENTAS" />
-            <div style={{ display: 'flex', gap: '0.75rem' }}>
+            <div className="flex-wrap-mobile" style={{ gap: '0.75rem' }}>
               {databases.map((s, i) => <SmallCard key={s.title} {...s} delay={i * 0.08} />)}
             </div>
           </div>

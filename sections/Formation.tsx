@@ -399,7 +399,7 @@ export default function Formation() {
           </div>
 
           {/* Stats */}
-          <div style={{ display: 'flex', gap: '2rem', flexShrink: 0 }}>
+          <div className="formation-bottom-stats" style={{ display: 'flex', gap: '2rem', flexShrink: 0 }}>
             {bottomStats.map(({ icon: Icon, value, label }) => (
               <div key={label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.35rem', textAlign: 'center' }}>
                 <div
