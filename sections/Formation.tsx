@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -104,7 +104,7 @@ export default function Formation() {
       <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
 
         {/* Header */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', alignItems: 'flex-start', gap: '2rem' }}>
+        <div className="projects-header">
           <div>
             <div style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.2em', color: 'var(--accent)', marginBottom: '0.5rem' }}>
               MI CAMINO DE APRENDIZAJE
@@ -125,7 +125,7 @@ export default function Formation() {
               width: '100px',
               height: '100px',
               borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(79,111,174,0.16) 0%, transparent 70%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -138,7 +138,7 @@ export default function Formation() {
         </div>
 
         {/* Two columns */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+        <div className="formation-2col">
 
           {/* Left: Educación académica */}
           <div>
@@ -157,7 +157,7 @@ export default function Formation() {
                   width: '30px',
                   height: '30px',
                   borderRadius: '0.5rem',
-                  background: 'rgba(124,58,237,0.15)',
+                  background: 'rgba(79,111,174,0.12)',
                   border: '1px solid var(--border)',
                   display: 'flex',
                   alignItems: 'center',
@@ -209,7 +209,7 @@ export default function Formation() {
                       width: '40px',
                       height: '40px',
                       borderRadius: '0.625rem',
-                      background: 'rgba(124,58,237,0.1)',
+                      background: 'rgba(79,111,174,0.08)',
                       border: '1px solid var(--border)',
                       display: 'flex',
                       alignItems: 'center',
@@ -263,7 +263,7 @@ export default function Formation() {
                   width: '30px',
                   height: '30px',
                   borderRadius: '0.5rem',
-                  background: 'rgba(124,58,237,0.15)',
+                  background: 'rgba(79,111,174,0.12)',
                   border: '1px solid var(--border)',
                   display: 'flex',
                   alignItems: 'center',
@@ -299,8 +299,8 @@ export default function Formation() {
                   }}
                   onMouseEnter={(e) => {
                     const d = e.currentTarget as HTMLDivElement;
-                    d.style.borderColor = 'rgba(168,85,247,0.35)';
-                    d.style.boxShadow = '0 0 18px rgba(124,58,237,0.12)';
+                    d.style.borderColor = 'rgba(102,132,196,0.3)';
+                    d.style.boxShadow = '0 0 18px rgba(79,111,174,0.1)';
                   }}
                   onMouseLeave={(e) => {
                     const d = e.currentTarget as HTMLDivElement;
@@ -343,7 +343,7 @@ export default function Formation() {
                             width: '22px',
                             height: '22px',
                             borderRadius: '0.375rem',
-                            background: 'rgba(124,58,237,0.15)',
+                            background: 'rgba(79,111,174,0.12)',
                             border: '1px solid var(--border)',
                             display: 'flex',
                             alignItems: 'center',
@@ -374,10 +374,8 @@ export default function Formation() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
+          className="formation-bottom"
           style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr auto',
-            gap: '2rem',
             alignItems: 'center',
             padding: '1.25rem 1.75rem',
             background: 'var(--bg-card)',
@@ -409,7 +407,7 @@ export default function Formation() {
                     width: '36px',
                     height: '36px',
                     borderRadius: '0.5rem',
-                    background: 'rgba(124,58,237,0.15)',
+                    background: 'rgba(79,111,174,0.12)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',

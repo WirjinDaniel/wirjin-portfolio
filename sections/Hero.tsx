@@ -16,7 +16,7 @@ const techStack = [
   { label: 'Django',     bg: '#092e20', img: '/django.png' },
   { label: 'DRF',        bg: '#7f1d1d', img: null, text: 'DRF' },
   { label: 'React',      bg: '#0c2340', img: '/React.png' },
-  { label: 'Next.js',    bg: '#111111', img: '/Next.js.png' },
+  { label: 'Next.js',    bg: '#ffffff', img: '/Next.js.png' },
   { label: 'PostgreSQL', bg: '#0d2137', img: '/postgresql.png' },
   { label: 'Git',        bg: '#2d0a00', img: '/git.png' },
 ];
@@ -25,28 +25,19 @@ export default function Hero({ onNavigate }: Props) {
   return (
     <section
       id="inicio"
+      className="hero-section"
       style={{
         minHeight: '100vh',
         position: 'relative',
         display: 'flex',
+        flexWrap: 'wrap',
         alignItems: 'center',
         overflow: 'hidden',
         background: 'var(--bg)',
       }}
     >
       {/* ── Left text column ── */}
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 3,
-          width: '42%',
-          minWidth: '340px',
-          padding: '5rem 0 4rem 2.5rem',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1.1rem',
-        }}
-      >
+      <div className="hero-text-col">
         {/* ¡HOLA! */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
@@ -54,7 +45,6 @@ export default function Hero({ onNavigate }: Props) {
           transition={{ duration: 0.45, delay: 0.1 }}
           style={{ fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.18em', color: 'var(--accent-bright)' }}
         >
-          ¡HOLA! 👋
         </motion.p>
 
         {/* Main title */}
@@ -70,7 +60,7 @@ export default function Hero({ onNavigate }: Props) {
             margin: 0,
           }}
         >
-          SOY WIRJIN
+          WIRJIN
           <br />
           <span className="glow-text">SÁNCHEZ</span>
         </motion.h1>
@@ -90,7 +80,7 @@ export default function Hero({ onNavigate }: Props) {
           }}
         >
           Analista de Sistemas
-          <br />&amp; Desarrollador Backend
+          <br />&amp; Desarrollador Backend & Frontend
         </motion.p>
 
         {/* Description */}
@@ -100,12 +90,14 @@ export default function Hero({ onNavigate }: Props) {
           transition={{ duration: 0.45, delay: 0.38 }}
           style={{ fontSize: '0.865rem', color: 'var(--text-soft)', lineHeight: 1.75, maxWidth: '380px' }}
         >
-          Me especializo en desarrollar aplicaciones web eficientes y escalables
-          utilizando{' '}
+          Como desarrollador de software, me especializo en crear aplicaciones web escalables 
+          y de alto rendimiento. Combino tecnologías como{' '}
           <span style={{ color: 'var(--accent-bright)', fontWeight: 600 }}>Python</span>,{' '}
           <span style={{ color: 'var(--accent-bright)', fontWeight: 600 }}>Django</span>,{' '}
-          <span style={{ color: 'var(--accent-bright)', fontWeight: 600 }}>React</span>{' '}
-          y tecnologías modernas.
+          <span style={{ color: 'var(--accent-bright)', fontWeight: 600 }}>React</span>,{' '}
+          <span style={{ color: 'var(--accent-bright)', fontWeight: 600 }}>Next.js</span>,{' '}
+          <span style={{ color: 'var(--accent-bright)', fontWeight: 600 }}>Tailwind</span>,{' '}
+          para desarrollar soluciones robustas, modernas y centradas en el usuario.
         </motion.p>
 
         {/* Buttons */}
@@ -130,16 +122,16 @@ export default function Hero({ onNavigate }: Props) {
               fontWeight: 700,
               cursor: 'pointer',
               transition: 'box-shadow 0.2s, transform 0.2s',
-              boxShadow: '0 0 20px rgba(124,58,237,0.35)',
+              boxShadow: '0 0 20px rgba(79,111,174,0.3)',
             }}
             onMouseEnter={(e) => {
               const b = e.currentTarget as HTMLButtonElement;
-              b.style.boxShadow = '0 0 36px rgba(124,58,237,0.6)';
+              b.style.boxShadow = '0 0 36px rgba(79,111,174,0.5)';
               b.style.transform = 'translateY(-2px)';
             }}
             onMouseLeave={(e) => {
               const b = e.currentTarget as HTMLButtonElement;
-              b.style.boxShadow = '0 0 20px rgba(124,58,237,0.35)';
+              b.style.boxShadow = '0 0 20px rgba(79,111,174,0.3)';
               b.style.transform = 'none';
             }}
           >
@@ -167,7 +159,7 @@ export default function Hero({ onNavigate }: Props) {
             onMouseEnter={(e) => {
               const a = e.currentTarget as HTMLAnchorElement;
               a.style.borderColor = 'var(--accent)';
-              a.style.background = 'rgba(124,58,237,0.1)';
+              a.style.background = 'rgba(79,111,174,0.08)';
             }}
             onMouseLeave={(e) => {
               const a = e.currentTarget as HTMLAnchorElement;
@@ -178,6 +170,17 @@ export default function Hero({ onNavigate }: Props) {
             Descargar CV <Download size={15} />
           </a>
         </motion.div>
+
+        {/* ── Mobile-only: available badge ── */}
+        <div className="hero-mobile-available">
+          <div style={{
+            width: '7px', height: '7px', borderRadius: '50%',
+            background: '#22c55e', boxShadow: '0 0 6px #22c55e',
+            animation: 'pulseDot 2s ease-in-out infinite', flexShrink: 0,
+          }} />
+          <span style={{ fontSize: '0.72rem', fontWeight: 600, color: '#22c55e' }}>Disponible para proyectos</span>
+          <span style={{ fontSize: '0.68rem', color: 'var(--text-soft)' }}>· nuevos desafíos</span>
+        </div>
 
         {/* Progress bar */}
         <motion.div
@@ -197,6 +200,28 @@ export default function Hero({ onNavigate }: Props) {
             <ChevronDown size={15} />
           </div>
           <span style={{ fontSize: '0.67rem', letterSpacing: '0.1em' }}>Desliza para explorar</span>
+        </div>
+
+        {/* ── Mobile-only: stats row ── */}
+        <div className="hero-mobile-stats-row">
+          {[
+            { icon: <Briefcase size={13} />, value: '4+', label: 'Años exp.' },
+            { icon: <Star size={13} />, value: '2+', label: 'Proyectos' },
+            { icon: <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', fontWeight: 900 }}>{'</>'}</span>, value: '100%', label: 'Comprometido' },
+          ].map((s) => (
+            <div key={s.label} className="hero-mobile-stat">
+              <div style={{
+                width: '26px', height: '26px', borderRadius: '0.4rem',
+                background: 'rgba(79,111,174,0.15)', border: '1px solid rgba(102,132,196,0.2)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: 'var(--accent-bright)', flexShrink: 0,
+              }}>{s.icon}</div>
+              <div>
+                <div style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--text)', lineHeight: 1 }}>{s.value}</div>
+                <div style={{ fontSize: '0.56rem', color: 'var(--text-soft)', marginTop: '0.1rem' }}>{s.label}</div>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Tech stack strip */}
@@ -236,20 +261,45 @@ export default function Hero({ onNavigate }: Props) {
         </motion.div>
       </div>
 
+      {/* ── Mobile-only: globe + stats ── */}
+      <div className="hero-mobile-block" style={{ display: 'none' }}>
+        {/* Globe */}
+        <div className="hero-mobile-globe-wrap">
+          <HeroGlobe />
+        </div>
+        {/* Stats row */}
+        <div className="hero-mobile-stats">
+          {[
+            { icon: <Briefcase size={14} />, value: '4+', label: 'Años de experiencia' },
+            { icon: <Star size={14} />, value: '2+', label: 'Proyectos completados' },
+            { icon: <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', fontWeight: 900 }}>{'</>'}</span>, value: '100%', label: 'Comprometido' },
+          ].map((s) => (
+            <div key={s.label} className="hero-mobile-stat-card">
+              <div
+                style={{
+                  width: '28px', height: '28px', borderRadius: '0.4rem',
+                  background: 'rgba(79,111,174,0.15)', border: '1px solid rgba(102,132,196,0.2)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  color: 'var(--accent-bright)', flexShrink: 0,
+                }}
+              >
+                {s.icon}
+              </div>
+              <div>
+                <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--text)', lineHeight: 1 }}>{s.value}</div>
+                <div style={{ fontSize: '0.58rem', color: 'var(--text-soft)', marginTop: '0.1rem' }}>{s.label}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* ── Right: photo + floating elements ── */}
-      <div
-        style={{
-          position: 'absolute',
-          right: 0,
-          top: 0,
-          width: '65%',
-          height: '100%',
-          zIndex: 1,
-        }}
-      >
+      <div className="hero-right-panel">
 
         {/* ── Code card (top-center) ── */}
         <motion.div
+          className="hero-desktop-only"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.5 }}
@@ -276,8 +326,8 @@ export default function Hero({ onNavigate }: Props) {
           </div>
           <div style={{ fontSize: '0.62rem', lineHeight: 1.7 }}>
             <div>
-              <span style={{ color: '#c084fc' }}>def </span>
-              <span style={{ color: '#f0abfc' }}>construir_sistemas</span>
+              <span style={{ color: '#6684C4' }}>def </span>
+              <span style={{ color: '#A8B2C5' }}>construir_sistemas</span>
               <span style={{ color: 'rgba(255,255,255,0.5)' }}>():</span>
             </div>
             <div style={{ paddingLeft: '1rem' }}>
@@ -289,7 +339,7 @@ export default function Hero({ onNavigate }: Props) {
             ))}
             <div style={{ paddingLeft: '1rem', color: 'rgba(255,255,255,0.5)' }}>]</div>
             <div style={{ paddingLeft: '1rem' }}>
-              <span style={{ color: '#c084fc' }}>return </span>
+              <span style={{ color: '#6684C4' }}>return </span>
               <span style={{ color: '#7dd3fc' }}>soluciones</span>
             </div>
             <div style={{ color: 'rgba(255,255,255,0.3)', marginTop: '0.2rem' }}># Soluciones que generan impacto</div>
@@ -298,6 +348,7 @@ export default function Hero({ onNavigate }: Props) {
 
         {/* ── </> box top-right ── */}
         <motion.div
+          className="hero-desktop-only"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.6 }}
@@ -326,6 +377,7 @@ export default function Hero({ onNavigate }: Props) {
 
         {/* ── Available badge ── */}
         <motion.div
+          className="hero-badge"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.85, duration: 0.5 }}
@@ -350,8 +402,8 @@ export default function Hero({ onNavigate }: Props) {
               width: '34px',
               height: '34px',
               borderRadius: '50%',
-              background: 'rgba(124,58,237,0.25)',
-              border: '1px solid rgba(168,85,247,0.4)',
+              background: 'rgba(79,111,174,0.2)',
+              border: '1px solid rgba(102,132,196,0.35)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -381,6 +433,7 @@ export default function Hero({ onNavigate }: Props) {
 
         {/* ── Large </> center-bottom ── */}
         <motion.div
+          className="hero-desktop-only"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0 }}
@@ -393,9 +446,9 @@ export default function Hero({ onNavigate }: Props) {
             fontSize: '3.5rem',
             fontWeight: 900,
             color: 'transparent',
-            WebkitTextStroke: '2px rgba(124,58,237,0.7)',
+            WebkitTextStroke: '2px rgba(79,111,174,0.6)',
             letterSpacing: '-0.04em',
-            textShadow: '0 0 60px rgba(124,58,237,0.3)',
+            textShadow: '0 0 60px rgba(79,111,174,0.2)',
             userSelect: 'none',
           }}
         >
@@ -404,6 +457,7 @@ export default function Hero({ onNavigate }: Props) {
 
         {/* ── Stats column (right) ── */}
         <motion.div
+          className="hero-stats"
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.75, duration: 0.55 }}
@@ -442,8 +496,8 @@ export default function Hero({ onNavigate }: Props) {
                   width: '32px',
                   height: '32px',
                   borderRadius: '0.5rem',
-                  background: 'rgba(124,58,237,0.2)',
-                  border: '1px solid rgba(168,85,247,0.25)',
+                  background: 'rgba(79,111,174,0.15)',
+                  border: '1px solid rgba(102,132,196,0.2)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -463,6 +517,7 @@ export default function Hero({ onNavigate }: Props) {
 
         {/* ── Globe (main visual, centered) ── */}
         <div
+          className="hero-globe-wrap"
           style={{
             position: 'absolute',
             top: '50%',
@@ -487,7 +542,7 @@ export default function Hero({ onNavigate }: Props) {
           width: '500px',
           height: '500px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(124,58,237,0.06) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(79,111,174,0.06) 0%, transparent 70%)',
           pointerEvents: 'none',
           zIndex: 0,
         }}

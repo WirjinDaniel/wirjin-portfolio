@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 const ITEMS = [
   { id: 'inicio', label: 'INICIO' },
@@ -79,7 +79,7 @@ export default function RightNav({ activeSection, onNavigate }: Props) {
                   height: isActive ? '10px' : '7px',
                   borderRadius: '50%',
                   background: isActive ? 'var(--accent-bright)' : 'rgba(255,255,255,0.15)',
-                  border: isActive ? '2px solid rgba(168,85,247,0.4)' : '1px solid rgba(255,255,255,0.1)',
+                  border: isActive ? '2px solid rgba(102,132,196,0.35)' : '1px solid rgba(255,255,255,0.1)',
                   boxShadow: isActive ? '0 0 12px var(--accent-glow)' : 'none',
                   transition: 'all 0.3s',
                   animation: isActive ? 'pulseDot 2s ease-in-out infinite' : 'none',

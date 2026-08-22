@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -33,7 +33,7 @@ function Stat({ value, suffix, label, icon: Icon }: typeof stats[number]) {
           width: '36px',
           height: '36px',
           borderRadius: '0.5rem',
-          background: 'rgba(124,58,237,0.15)',
+          background: 'rgba(79,111,174,0.12)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -63,7 +63,7 @@ const bullets = [
 export default function About() {
   return (
     <Section id="sobre-mi">
-      <div style={{ width: '100%', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
+      <div className="about-grid">
         {/* Left */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
           {/* Title */}
@@ -74,7 +74,7 @@ export default function About() {
                   width: '32px',
                   height: '32px',
                   borderRadius: '0.5rem',
-                  background: 'rgba(124,58,237,0.15)',
+                  background: 'rgba(79,111,174,0.12)',
                   border: '1px solid var(--border)',
                   display: 'flex',
                   alignItems: 'center',
@@ -117,7 +117,7 @@ export default function About() {
           </ul>
 
           {/* Stats */}
-          <div style={{ display: 'flex', gap: '0.75rem' }}>
+          <div className="flex-wrap-mobile" style={{ gap: '0.75rem' }}>
             {stats.map((s) => (
               <Stat key={s.label} {...s} />
             ))}
@@ -135,7 +135,7 @@ export default function About() {
             borderRadius: '1.25rem',
             position: 'relative',
             overflow: 'hidden',
-            boxShadow: '0 0 60px rgba(124,58,237,0.18), 0 0 120px rgba(124,58,237,0.08)',
+            boxShadow: '0 0 60px rgba(79,111,174,0.14), 0 0 120px rgba(79,111,174,0.07)',
           }}
         >
           <Image

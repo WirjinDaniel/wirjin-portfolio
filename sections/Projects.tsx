@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -41,7 +41,7 @@ export default function Projects() {
       <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
 
         {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}>
+        <div className="projects-header">
           <div>
             <div style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.2em', color: 'var(--accent)', marginBottom: '0.5rem' }}>
               PORTAFOLIO
@@ -64,7 +64,7 @@ export default function Projects() {
               alignItems: 'center',
               gap: '0.625rem',
               padding: '0.7rem 1.25rem',
-              background: 'rgba(124,58,237,0.12)',
+              background: 'rgba(79,111,174,0.1)',
               border: '1px solid var(--border)',
               borderRadius: '0.625rem',
               color: 'var(--text)',
@@ -78,7 +78,7 @@ export default function Projects() {
             onMouseEnter={(e) => {
               const b = e.currentTarget as HTMLButtonElement;
               b.style.borderColor = 'var(--accent)';
-              b.style.boxShadow = '0 0 20px rgba(124,58,237,0.2)';
+              b.style.boxShadow = '0 0 20px rgba(79,111,174,0.16)';
             }}
             onMouseLeave={(e) => {
               const b = e.currentTarget as HTMLButtonElement;
@@ -93,7 +93,7 @@ export default function Projects() {
         </div>
 
         {/* Project cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+        <div className="formation-2col" style={{ gap: '1.5rem' }}>
           {projects.map((p, i) => (
             <motion.article
               key={p.title}
@@ -113,8 +113,8 @@ export default function Projects() {
               }}
               onMouseEnter={(e) => {
                 const d = e.currentTarget as HTMLElement;
-                d.style.boxShadow = '0 12px 60px rgba(124,58,237,0.25)';
-                d.style.borderColor = 'rgba(168,85,247,0.45)';
+                d.style.boxShadow = '0 12px 60px rgba(79,111,174,0.2)';
+                d.style.borderColor = 'rgba(102,132,196,0.38)';
               }}
               onMouseLeave={(e) => {
                 const d = e.currentTarget as HTMLElement;
@@ -128,7 +128,7 @@ export default function Projects() {
                   position: 'relative',
                   height: '300px',
                   overflow: 'hidden',
-                  background: 'linear-gradient(135deg, rgba(124,58,237,0.1), rgba(168,85,247,0.04))',
+                  background: 'linear-gradient(135deg, rgba(79,111,174,0.08), rgba(102,132,196,0.04))',
                 }}
               >
                 <Image
@@ -189,7 +189,7 @@ export default function Projects() {
                       transition={{ duration: 1, delay: 0.3 + i * 0.15, ease: 'easeOut' }}
                       style={{
                         height: '100%',
-                        background: 'linear-gradient(90deg, #7c3aed, #a855f7)',
+                        background: 'linear-gradient(90deg, #4F6FAE, #6684C4)',
                         borderRadius: '99px',
                       }}
                     />
@@ -234,7 +234,7 @@ export default function Projects() {
                     }}
                     onMouseEnter={(e) => {
                       const b = e.currentTarget as HTMLButtonElement;
-                      b.style.boxShadow = '0 0 20px rgba(124,58,237,0.5)';
+                      b.style.boxShadow = '0 0 20px rgba(79,111,174,0.4)';
                       b.style.transform = 'scale(1.1)';
                     }}
                     onMouseLeave={(e) => {
@@ -265,7 +265,7 @@ export default function Projects() {
                 alignItems: 'center',
                 gap: '0.875rem',
                 padding: '1rem 1.125rem',
-                background: 'rgba(124,58,237,0.08)',
+                background: 'rgba(79,111,174,0.07)',
                 border: '1px solid var(--border)',
                 borderRadius: '0.875rem',
               }}
@@ -273,7 +273,7 @@ export default function Projects() {
               <div
                 style={{
                   width: '44px', height: '44px', borderRadius: '0.75rem',
-                  background: 'linear-gradient(135deg, rgba(124,58,237,0.4), rgba(168,85,247,0.2))',
+                  background: 'linear-gradient(135deg, rgba(79,111,174,0.32), rgba(102,132,196,0.18))',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   color: '#fff', flexShrink: 0,
                 }}

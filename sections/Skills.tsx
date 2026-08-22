@@ -30,8 +30,8 @@ function CircleProgress({ value, size = 52 }: { value: number; size?: number }) 
         />
         <defs>
           <linearGradient id="pg" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#7c3aed" />
-            <stop offset="100%" stopColor="#a855f7" />
+            <stop offset="0%" stopColor="#4F6FAE" />
+            <stop offset="100%" stopColor="#6684C4" />
           </linearGradient>
         </defs>
       </svg>
@@ -54,7 +54,7 @@ function BarProgress({ value, delay = 0 }: { value: number; delay?: number }) {
         whileInView={{ width: `${value}%` }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay, ease: 'easeOut' }}
-        style={{ height: '100%', background: 'linear-gradient(90deg, #7c3aed, #a855f7)', borderRadius: '99px' }}
+        style={{ height: '100%', background: 'linear-gradient(90deg, #4F6FAE, #6684C4)', borderRadius: '99px' }}
       />
     </div>
   );
@@ -69,7 +69,7 @@ const backend = [
 
 const frontend = [
   { img: '/React.png',   iconBg: '#0d2a3a', title: 'React',   subtitle: 'UI Libraries',   level: 72, desc: 'Creación de interfaces dinámicas y componentes reutilizables.' },
-  { img: '/Next.js.png', iconBg: '#1a1a1a', title: 'Next.js', subtitle: 'React Framework', level: 72, desc: 'Aplicaciones web modernas con renderizado optimizado.' },
+  { img: '/Next.js.png', iconBg: '#ffffff', title: 'Next.js', subtitle: 'React Framework', level: 72, desc: 'Aplicaciones web modernas con renderizado optimizado.' },
 ];
 
 const databases = [
@@ -110,8 +110,8 @@ function BigCard({ img, text, iconBg, title, subtitle, level, desc, delay = 0 }:
       }}
       onMouseEnter={(e) => {
         const d = e.currentTarget as HTMLDivElement;
-        d.style.boxShadow = '0 0 28px rgba(124,58,237,0.18)';
-        d.style.borderColor = 'rgba(168,85,247,0.4)';
+        d.style.boxShadow = '0 0 28px rgba(79,111,174,0.15)';
+        d.style.borderColor = 'rgba(102,132,196,0.35)';
       }}
       onMouseLeave={(e) => {
         const d = e.currentTarget as HTMLDivElement;
@@ -168,8 +168,8 @@ function SmallCard({ img, text, title, subtitle, level, delay = 0 }: typeof data
       }}
       onMouseEnter={(e) => {
         const d = e.currentTarget as HTMLDivElement;
-        d.style.boxShadow = '0 0 20px rgba(124,58,237,0.15)';
-        d.style.borderColor = 'rgba(168,85,247,0.35)';
+        d.style.boxShadow = '0 0 20px rgba(79,111,174,0.12)';
+        d.style.borderColor = 'rgba(102,132,196,0.3)';
       }}
       onMouseLeave={(e) => {
         const d = e.currentTarget as HTMLDivElement;
@@ -180,7 +180,7 @@ function SmallCard({ img, text, title, subtitle, level, delay = 0 }: typeof data
       <div style={{ width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         {img
           ? <Image src={img} alt={title} width={28} height={28} style={{ objectFit: 'contain' }} />
-          : <span style={{ fontSize: '0.6rem', fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#a855f7' }}>{text}</span>
+          : <span style={{ fontSize: '0.6rem', fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#6684C4' }}>{text}</span>
         }
       </div>
       <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text)', lineHeight: 1.2 }}>{title}</div>
@@ -213,8 +213,8 @@ function AptCard({ icon: Icon, label, desc, delay = 0 }: typeof aptitudes[number
       }}
       onMouseEnter={(e) => {
         const d = e.currentTarget as HTMLDivElement;
-        d.style.boxShadow = '0 0 18px rgba(124,58,237,0.14)';
-        d.style.borderColor = 'rgba(168,85,247,0.3)';
+        d.style.boxShadow = '0 0 18px rgba(79,111,174,0.12)';
+        d.style.borderColor = 'rgba(102,132,196,0.25)';
       }}
       onMouseLeave={(e) => {
         const d = e.currentTarget as HTMLDivElement;
@@ -225,7 +225,7 @@ function AptCard({ icon: Icon, label, desc, delay = 0 }: typeof aptitudes[number
       <div
         style={{
           width: '36px', height: '36px', borderRadius: '0.5rem',
-          background: 'rgba(124,58,237,0.12)', border: '1px solid var(--border)',
+          background: 'rgba(79,111,174,0.1)', border: '1px solid var(--border)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           color: 'var(--accent-bright)',
         }}
@@ -247,7 +247,7 @@ function CatHeader({ icon: Icon, label }: { icon: React.FC<LucideProps>; label: 
       <div
         style={{
           width: '32px', height: '32px', borderRadius: '0.5rem',
-          background: 'rgba(124,58,237,0.15)', border: '1px solid var(--border)',
+          background: 'rgba(79,111,174,0.12)', border: '1px solid var(--border)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           color: 'var(--accent-bright)',
         }}
@@ -266,7 +266,7 @@ export default function Skills() {
       <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
 
         {/* Header row */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', alignItems: 'flex-start' }}>
+        <div className="skills-header-grid">
           {/* Left: title */}
           <div>
             <div style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.2em', color: 'var(--accent)', marginBottom: '0.5rem' }}>
@@ -322,7 +322,7 @@ export default function Skills() {
                 <div
                   key={s.label}
                   style={{
-                    background: 'rgba(124,58,237,0.15)', border: '1px solid var(--border)',
+                    background: 'rgba(79,111,174,0.12)', border: '1px solid var(--border)',
                     borderRadius: '0.625rem', padding: '0.5rem 0.875rem',
                     fontSize: '0.65rem', color: 'var(--text-soft)',
                     backdropFilter: 'blur(8px)',
@@ -339,17 +339,17 @@ export default function Skills() {
         {/* BACKEND & APIS */}
         <div>
           <CatHeader icon={Monitor} label="BACKEND & APIS" />
-          <div style={{ display: 'flex', gap: '1rem' }}>
+          <div className="flex-wrap-mobile" style={{ gap: '1rem' }}>
             {backend.map((s, i) => <BigCard key={s.title} {...s} delay={i * 0.1} />)}
           </div>
         </div>
 
         {/* FRONTEND + BASES DE DATOS */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+        <div className="skills-bottom-grid">
           {/* Frontend */}
           <div>
             <CatHeader icon={Monitor} label="FRONTEND" />
-            <div style={{ display: 'flex', gap: '1rem' }}>
+            <div className="flex-wrap-mobile" style={{ gap: '1rem' }}>
               {frontend.map((s, i) => <BigCard key={s.title} {...s} delay={i * 0.1} />)}
             </div>
           </div>
@@ -366,7 +366,7 @@ export default function Skills() {
         {/* APTITUDES PROFESIONALES */}
         <div>
           <CatHeader icon={Star} label="APTITUDES PROFESIONALES" />
-          <div style={{ display: 'flex', gap: '0.875rem' }}>
+          <div className="flex-wrap-mobile" style={{ gap: '0.875rem' }}>
             {aptitudes.map((a, i) => <AptCard key={a.label} {...a} delay={i * 0.07} />)}
           </div>
         </div>
