@@ -1,6 +1,7 @@
-'use client';
+﻿'use client';
 
 import { Home, User, Code, FolderKanban, Mail, GraduationCap, ChevronRight, Rocket, Moon } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const links = [
   { id: 'inicio', label: 'Inicio', icon: Home },
@@ -17,6 +18,21 @@ interface Props {
 }
 
 export default function Navbar({ activeSection, onNavigate }: Props) {
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+
+  useEffect(() => {
+    const stored = localStorage.getItem('theme') as 'dark' | 'light' | null;
+    const current = document.documentElement.getAttribute('data-theme') as 'dark' | 'light';
+    setTheme(stored || current || 'dark');
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    setTheme(next);
+  };
+
   return (
     <nav
       className="sidebar"
@@ -24,8 +40,8 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
         width: '260px',
         height: '100vh',
         flexDirection: 'column',
-        background: '#08081e',
-        borderRight: '1px solid rgba(124,58,237,0.18)',
+        background: 'var(--sidebar, #0B1020)',
+        borderRight: '1px solid rgba(79,111,174,0.14)',
         flexShrink: 0,
         position: 'sticky',
         top: 0,
@@ -52,7 +68,7 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
               position: 'absolute',
               inset: '-14px',
               borderRadius: '50%',
-              border: '1px solid rgba(124,58,237,0.3)',
+              border: '1px solid rgba(79,111,174,0.25)',
               animation: 'rotateSlow 8s linear infinite',
             }}
           >
@@ -65,8 +81,8 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
                 width: '7px',
                 height: '7px',
                 borderRadius: '50%',
-                background: '#a855f7',
-                boxShadow: '0 0 8px #a855f7',
+                background: '#6684C4',
+                boxShadow: '0 0 8px #6684C4',
                 transform: 'translate(-50%, -50%) translateY(-54px)',
               }}
             />
@@ -78,7 +94,7 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
               position: 'absolute',
               inset: '-6px',
               borderRadius: '50%',
-              border: '1px dashed rgba(168,85,247,0.2)',
+              border: '1px dashed rgba(102,132,196,0.18)',
               animation: 'rotateSlowReverse 12s linear infinite',
             }}
           />
@@ -89,7 +105,7 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
               width: '80px',
               height: '80px',
               borderRadius: '1.25rem',
-              background: 'linear-gradient(135deg, #3b0764, #7c3aed)',
+              background: 'linear-gradient(135deg, #0D1322, #4F6FAE)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -123,10 +139,9 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
               color: 'var(--text)',
             }}
           >
-            WIRJIN SÁNCHEZ
           </div>
           <div style={{ fontSize: '0.72rem', color: 'var(--text-soft)', marginTop: '0.2rem' }}>
-            Backend Developer
+            Developer
           </div>
         </div>
 
@@ -181,9 +196,9 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
                   gap: '0.75rem',
                   padding: '0.75rem 1rem',
                   background: isActive
-                    ? 'linear-gradient(135deg, rgba(124,58,237,0.25), rgba(124,58,237,0.1))'
+                    ? 'linear-gradient(135deg, rgba(79,111,174,0.2), rgba(79,111,174,0.08))'
                     : 'rgba(255,255,255,0.03)',
-                  border: `1px solid ${isActive ? 'rgba(168,85,247,0.4)' : 'rgba(255,255,255,0.06)'}`,
+                  border: `1px solid ${isActive ? 'rgba(102,132,196,0.35)' : 'rgba(255,255,255,0.06)'}`,
                   borderLeft: `3px solid ${isActive ? 'var(--accent-bright)' : 'transparent'}`,
                   borderRadius: '0.75rem',
                   color: isActive ? 'var(--text)' : 'var(--text-soft)',
@@ -196,8 +211,8 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
                 onMouseEnter={(e) => {
                   if (!isActive) {
                     const b = e.currentTarget as HTMLButtonElement;
-                    b.style.background = 'rgba(124,58,237,0.08)';
-                    b.style.borderColor = 'rgba(168,85,247,0.2)';
+                    b.style.background = 'rgba(79,111,174,0.07)';
+                    b.style.borderColor = 'rgba(102,132,196,0.18)';
                     b.style.color = 'var(--text)';
                   }
                 }}
@@ -217,7 +232,7 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
                     height: '32px',
                     borderRadius: '0.5rem',
                     background: isActive
-                      ? 'rgba(124,58,237,0.3)'
+                      ? 'rgba(79,111,174,0.25)'
                       : 'rgba(255,255,255,0.05)',
                     display: 'flex',
                     alignItems: 'center',
@@ -254,8 +269,8 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
             alignItems: 'center',
             gap: '0.875rem',
             padding: '0.875rem 1rem',
-            background: 'rgba(124,58,237,0.1)',
-            border: '1px solid rgba(124,58,237,0.2)',
+            background: 'rgba(79,111,174,0.08)',
+            border: '1px solid rgba(79,111,174,0.16)',
             borderRadius: '0.875rem',
           }}
         >
@@ -264,8 +279,8 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
               width: '36px',
               height: '36px',
               borderRadius: '50%',
-              background: 'rgba(124,58,237,0.25)',
-              border: '1px solid rgba(168,85,247,0.3)',
+              background: 'rgba(79,111,174,0.2)',
+              border: '1px solid rgba(102,132,196,0.25)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -298,29 +313,37 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
           }}
         >
           <Moon size={15} style={{ color: 'var(--text-soft)' }} />
-          <span style={{ fontSize: '0.8rem', color: 'var(--text-soft)', flex: 1 }}>Modo oscuro</span>
+          <span style={{ fontSize: '0.8rem', color: 'var(--text-soft)', flex: 1 }}>
+            {theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
+          </span>
           {/* Toggle switch */}
           <div
+            onClick={toggleTheme}
             style={{
               width: '36px',
               height: '20px',
               borderRadius: '99px',
-              background: 'linear-gradient(135deg, var(--accent), var(--accent-bright))',
+              background: theme === 'dark'
+                ? 'linear-gradient(135deg, var(--accent), var(--accent-bright))'
+                : 'rgba(200,200,200,0.4)',
               position: 'relative',
               cursor: 'pointer',
               flexShrink: 0,
-              boxShadow: '0 0 10px rgba(124,58,237,0.4)',
+              boxShadow: theme === 'dark' ? '0 0 10px rgba(79,111,174,0.32)' : 'none',
+              transition: 'background 0.25s',
             }}
           >
             <div
               style={{
                 position: 'absolute',
-                right: '3px',
+                left: theme === 'dark' ? 'auto' : '3px',
+                right: theme === 'dark' ? '3px' : 'auto',
                 top: '3px',
                 width: '14px',
                 height: '14px',
                 borderRadius: '50%',
                 background: '#fff',
+                transition: 'left 0.25s, right 0.25s',
               }}
             />
           </div>

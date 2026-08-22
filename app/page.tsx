@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { Home as HomeIcon, User, Code, FolderKanban, GraduationCap, Mail, Moon } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import RightNav from '@/components/RightNav';
 import Hero from '@/sections/Hero';
@@ -12,14 +13,14 @@ import Contact from '@/sections/Contact';
 
 const SECTIONS = ['inicio', 'sobre-mi', 'habilidades', 'proyectos', 'formacion', 'contacto'];
 
-const LABELS: Record<string, string> = {
-  inicio: 'Inicio',
-  'sobre-mi': 'Sobre mí',
-  habilidades: 'Skills',
-  proyectos: 'Proyectos',
-  formacion: 'Formación',
-  contacto: 'Contacto',
-};
+const NAV_ITEMS = [
+  { id: 'inicio',       label: 'Inicio',    Icon: HomeIcon },
+  { id: 'sobre-mi',     label: 'Sobre mí',  Icon: User },
+  { id: 'habilidades',  label: 'Skills',    Icon: Code },
+  { id: 'proyectos',    label: 'Proyectos', Icon: FolderKanban },
+  { id: 'formacion',    label: 'Formación', Icon: GraduationCap },
+  { id: 'contacto',     label: 'Contacto',  Icon: Mail },
+];
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('inicio');
@@ -86,6 +87,21 @@ function MobileNav({
   activeSection: string;
   onNavigate: (id: string) => void;
 }) {
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+
+  useEffect(() => {
+    const stored = localStorage.getItem('theme') as 'dark' | 'light' | null;
+    const current = document.documentElement.getAttribute('data-theme') as 'dark' | 'light';
+    setTheme(stored || current || 'dark');
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    setTheme(next);
+  };
+
   return (
     <div
       className="mobile-nav"
@@ -103,7 +119,7 @@ function MobileNav({
         alignItems: 'center',
       }}
     >
-      {SECTIONS.map((id) => {
+      {NAV_ITEMS.map(({ id, label, Icon }) => {
         const isActive = activeSection === id;
         return (
           <button
@@ -124,18 +140,32 @@ function MobileNav({
               transition: 'color 0.2s',
             }}
           >
-            <span
-              style={{
-                width: '4px',
-                height: '4px',
-                borderRadius: '50%',
-                background: isActive ? 'var(--accent-bright)' : 'transparent',
-              }}
-            />
-            {LABELS[id]}
+            <Icon size={14} />
+            {label}
           </button>
         );
       })}
+
+      {/* Theme toggle */}
+      <button
+        onClick={toggleTheme}
+        style={{
+          background: 'none',
+          border: 'none',
+          color: 'var(--text-soft)',
+          fontSize: '0.6rem',
+          cursor: 'pointer',
+          padding: '0.4rem 0.5rem',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '0.2rem',
+          transition: 'color 0.2s',
+        }}
+      >
+        <Moon size={14} />
+        {theme === 'dark' ? 'Oscuro' : 'Claro'}
+      </button>
     </div>
   );
 }
