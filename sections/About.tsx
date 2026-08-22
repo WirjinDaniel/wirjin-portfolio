@@ -24,7 +24,7 @@ function Stat({ value, suffix, label, icon: Icon }: typeof stats[number]) {
         padding: '1rem 1.25rem',
         background: 'var(--bg-card)',
         border: '1px solid var(--border)',
-        borderRadius: '0.75rem',
+        borderRadius: 'var(--radius-md)',
         flex: 1,
       }}
     >
@@ -32,7 +32,7 @@ function Stat({ value, suffix, label, icon: Icon }: typeof stats[number]) {
         style={{
           width: '36px',
           height: '36px',
-          borderRadius: '0.5rem',
+          borderRadius: 'var(--radius-sm)',
           background: 'rgba(79,111,174,0.12)',
           display: 'flex',
           alignItems: 'center',
@@ -44,7 +44,7 @@ function Stat({ value, suffix, label, icon: Icon }: typeof stats[number]) {
         <Icon size={16} />
       </div>
       <div>
-        <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--accent-bright)', lineHeight: 1 }}>
+        <div style={{ fontSize: '1.25rem', fontWeight: 'var(--font-extrabold)', color: 'var(--accent-bright)', lineHeight: 1 }}>
           {count}{suffix}
         </div>
         <div style={{ fontSize: '0.65rem', color: 'var(--text-soft)', marginTop: '0.2rem' }}>{label}</div>
@@ -73,7 +73,7 @@ export default function About() {
                 style={{
                   width: '32px',
                   height: '32px',
-                  borderRadius: '0.5rem',
+                  borderRadius: 'var(--radius-sm)',
                   background: 'rgba(79,111,174,0.12)',
                   border: '1px solid var(--border)',
                   display: 'flex',
@@ -84,11 +84,11 @@ export default function About() {
               >
                 <Code2 size={15} />
               </div>
-              <span style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.2em', color: 'var(--accent)' }}>
+              <span style={{ fontSize: '0.65rem', fontWeight: 'var(--font-bold)', letterSpacing: '0.2em', color: 'var(--accent-bright)' }}>
                 SOBRE MÍ
               </span>
             </div>
-            <h2 style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', fontWeight: 800, letterSpacing: '-0.02em' }}>
+            <h2 style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', fontWeight: 'var(--font-extrabold)', letterSpacing: '-0.02em' }}>
               SOBRE MÍ
             </h2>
             <div style={{ width: '40px', height: '3px', background: 'linear-gradient(90deg, var(--accent), var(--accent-bright))', borderRadius: '2px', marginTop: '0.6rem' }} />
@@ -126,13 +126,14 @@ export default function About() {
 
         {/* Right: desk image */}
         <motion.div
+          className="about-image"
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           style={{
-            height: '380px',
-            borderRadius: '1.25rem',
+            width: '100%',
+            borderRadius: 'var(--radius-xl)',
             position: 'relative',
             overflow: 'hidden',
             boxShadow: '0 0 60px rgba(79,111,174,0.14), 0 0 120px rgba(79,111,174,0.07)',
@@ -142,6 +143,7 @@ export default function About() {
             src="/laptop.png"
             alt="Developer desk setup"
             fill
+            sizes="(max-width: 768px) 100vw, 50vw"
             style={{ objectFit: 'cover', objectPosition: 'center' }}
           />
           {/* Subtle overlay to blend with theme */}

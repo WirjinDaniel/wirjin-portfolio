@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ArrowRight, Download, ChevronDown, Briefcase, Star } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import Button from '@/components/Button';
 
 const HeroGlobe = dynamic(() => import('@/components/HeroGlobe'), { ssr: false });
 
@@ -43,7 +44,7 @@ export default function Hero({ onNavigate }: Props) {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.1 }}
-          style={{ fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.18em', color: 'var(--accent-bright)' }}
+          style={{ fontSize: '0.8rem', fontWeight: 'var(--font-bold)', letterSpacing: '0.18em', color: 'var(--accent-bright)' }}
         >
         </motion.p>
 
@@ -54,7 +55,7 @@ export default function Hero({ onNavigate }: Props) {
           transition={{ duration: 0.5, delay: 0.18 }}
           style={{
             fontSize: 'clamp(2.4rem, 4.5vw, 4rem)',
-            fontWeight: 900,
+            fontWeight: 'var(--font-black)',
             lineHeight: 1.0,
             letterSpacing: '-0.03em',
             margin: 0,
@@ -72,7 +73,7 @@ export default function Hero({ onNavigate }: Props) {
           transition={{ duration: 0.45, delay: 0.28 }}
           style={{
             fontSize: '0.72rem',
-            fontWeight: 700,
+            fontWeight: 'var(--font-bold)',
             letterSpacing: '0.15em',
             color: 'var(--text-soft)',
             textTransform: 'uppercase',
@@ -92,11 +93,11 @@ export default function Hero({ onNavigate }: Props) {
         >
           Como desarrollador de software, me especializo en crear aplicaciones web escalables 
           y de alto rendimiento. Combino tecnologías como{' '}
-          <span style={{ color: 'var(--accent-bright)', fontWeight: 600 }}>Python</span>,{' '}
-          <span style={{ color: 'var(--accent-bright)', fontWeight: 600 }}>Django</span>,{' '}
-          <span style={{ color: 'var(--accent-bright)', fontWeight: 600 }}>React</span>,{' '}
-          <span style={{ color: 'var(--accent-bright)', fontWeight: 600 }}>Next.js</span>,{' '}
-          <span style={{ color: 'var(--accent-bright)', fontWeight: 600 }}>Tailwind</span>,{' '}
+          <span style={{ color: 'var(--accent-bright)', fontWeight: 'var(--font-medium)' }}>Python</span>,{' '}
+          <span style={{ color: 'var(--accent-bright)', fontWeight: 'var(--font-medium)' }}>Django</span>,{' '}
+          <span style={{ color: 'var(--accent-bright)', fontWeight: 'var(--font-medium)' }}>React</span>,{' '}
+          <span style={{ color: 'var(--accent-bright)', fontWeight: 'var(--font-medium)' }}>Next.js</span>,{' '}
+          <span style={{ color: 'var(--accent-bright)', fontWeight: 'var(--font-medium)' }}>Tailwind</span>,{' '}
           para desarrollar soluciones robustas, modernas y centradas en el usuario.
         </motion.p>
 
@@ -107,78 +108,23 @@ export default function Hero({ onNavigate }: Props) {
           transition={{ duration: 0.45, delay: 0.48 }}
           style={{ display: 'flex', gap: '0.875rem', flexWrap: 'wrap' }}
         >
-          <button
-            onClick={() => onNavigate('proyectos')}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.72rem 1.5rem',
-              background: 'linear-gradient(135deg, var(--accent), var(--accent-bright))',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '0.5rem',
-              fontSize: '0.82rem',
-              fontWeight: 700,
-              cursor: 'pointer',
-              transition: 'box-shadow 0.2s, transform 0.2s',
-              boxShadow: '0 0 20px rgba(79,111,174,0.3)',
-            }}
-            onMouseEnter={(e) => {
-              const b = e.currentTarget as HTMLButtonElement;
-              b.style.boxShadow = '0 0 36px rgba(79,111,174,0.5)';
-              b.style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={(e) => {
-              const b = e.currentTarget as HTMLButtonElement;
-              b.style.boxShadow = '0 0 20px rgba(79,111,174,0.3)';
-              b.style.transform = 'none';
-            }}
-          >
+          <Button variant="primary" onClick={() => onNavigate('proyectos')}>
             Ver mis proyectos <ArrowRight size={15} />
-          </button>
+          </Button>
 
-          <a
-            href="/Wirjin Sanchez (1).pdf"
-            download
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.72rem 1.5rem',
-              background: 'rgba(255,255,255,0.05)',
-              color: 'var(--text)',
-              border: '1px solid rgba(255,255,255,0.15)',
-              borderRadius: '0.5rem',
-              fontSize: '0.82rem',
-              fontWeight: 700,
-              cursor: 'pointer',
-              textDecoration: 'none',
-              transition: 'border-color 0.2s, background 0.2s',
-            }}
-            onMouseEnter={(e) => {
-              const a = e.currentTarget as HTMLAnchorElement;
-              a.style.borderColor = 'var(--accent)';
-              a.style.background = 'rgba(79,111,174,0.08)';
-            }}
-            onMouseLeave={(e) => {
-              const a = e.currentTarget as HTMLAnchorElement;
-              a.style.borderColor = 'rgba(255,255,255,0.15)';
-              a.style.background = 'rgba(255,255,255,0.05)';
-            }}
-          >
+          <Button variant="ghost" href="/Wirjin Sanchez (1).pdf" download>
             Descargar CV <Download size={15} />
-          </a>
+          </Button>
         </motion.div>
 
         {/* ── Mobile-only: available badge ── */}
         <div className="hero-mobile-available">
           <div style={{
-            width: '7px', height: '7px', borderRadius: '50%',
-            background: '#22c55e', boxShadow: '0 0 6px #22c55e',
+            width: '7px', height: '7px', borderRadius: 'var(--radius-full)',
+            background: 'var(--success)', boxShadow: '0 0 6px var(--success)',
             animation: 'pulseDot 2s ease-in-out infinite', flexShrink: 0,
           }} />
-          <span style={{ fontSize: '0.72rem', fontWeight: 600, color: '#22c55e' }}>Disponible para proyectos</span>
+          <span style={{ fontSize: '0.72rem', fontWeight: 'var(--font-medium)', color: 'var(--success)' }}>Disponible para proyectos</span>
           <span style={{ fontSize: '0.68rem', color: 'var(--text-soft)' }}>· nuevos desafíos</span>
         </div>
 
@@ -189,7 +135,7 @@ export default function Hero({ onNavigate }: Props) {
           transition={{ delay: 0.75 }}
           style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}
         >
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', fontWeight: 700, color: 'var(--accent-bright)' }}>01</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', fontWeight: 'var(--font-bold)', color: 'var(--accent-bright)' }}>01</span>
           <div style={{ width: '48px', height: '1px', background: 'linear-gradient(90deg, var(--accent), transparent)' }} />
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--text-soft)' }}>06</span>
         </motion.div>
@@ -207,18 +153,18 @@ export default function Hero({ onNavigate }: Props) {
           {[
             { icon: <Briefcase size={13} />, value: '4+', label: 'Años exp.' },
             { icon: <Star size={13} />, value: '2+', label: 'Proyectos' },
-            { icon: <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', fontWeight: 900 }}>{'</>'}</span>, value: '100%', label: 'Comprometido' },
+            { icon: <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', fontWeight: 'var(--font-black)' }}>{'</>'}</span>, value: '100%', label: 'Comprometido' },
           ].map((s) => (
             <div key={s.label} className="hero-mobile-stat">
               <div style={{
                 width: '26px', height: '26px', borderRadius: '0.4rem',
-                background: 'rgba(79,111,174,0.15)', border: '1px solid rgba(102,132,196,0.2)',
+                background: 'var(--accent-glow)', border: '1px solid rgba(102,132,196,0.2)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 color: 'var(--accent-bright)', flexShrink: 0,
               }}>{s.icon}</div>
               <div>
-                <div style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--text)', lineHeight: 1 }}>{s.value}</div>
-                <div style={{ fontSize: '0.56rem', color: 'var(--text-soft)', marginTop: '0.1rem' }}>{s.label}</div>
+                <div style={{ fontSize: '0.82rem', fontWeight: 'var(--font-extrabold)', color: '#fff', lineHeight: 1 }}>{s.value}</div>
+                <div style={{ fontSize: '0.56rem', color: 'rgba(255,255,255,0.65)', marginTop: '0.1rem' }}>{s.label}</div>
               </div>
             </div>
           ))}
@@ -231,7 +177,7 @@ export default function Hero({ onNavigate }: Props) {
           transition={{ delay: 1.0 }}
           style={{ marginTop: '0.5rem' }}
         >
-          <p style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.18em', color: 'var(--text-soft)', marginBottom: '0.625rem' }}>
+          <p style={{ fontSize: '0.6rem', fontWeight: 'var(--font-bold)', letterSpacing: '0.18em', color: 'var(--text-soft)', marginBottom: '0.625rem' }}>
             TECNOLOGÍAS
           </p>
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
@@ -244,7 +190,7 @@ export default function Hero({ onNavigate }: Props) {
                   justifyContent: 'center',
                   width: '44px',
                   height: '44px',
-                  borderRadius: '0.625rem',
+                  borderRadius: 'var(--radius-sm)',
                   background: t.bg,
                   border: '1px solid rgba(255,255,255,0.08)',
                   cursor: 'default',
@@ -253,7 +199,7 @@ export default function Hero({ onNavigate }: Props) {
               >
                 {t.img
                   ? <Image src={t.img} alt={t.label} width={26} height={26} style={{ objectFit: 'contain' }} />
-                  : <span style={{ fontSize: '0.55rem', fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#f87171' }}>{t.text}</span>
+                  : <span style={{ fontSize: '0.55rem', fontWeight: 'var(--font-black)', fontFamily: 'var(--font-mono)', color: '#f87171' }}>{t.text}</span>
                 }
               </div>
             ))}
@@ -272,13 +218,13 @@ export default function Hero({ onNavigate }: Props) {
           {[
             { icon: <Briefcase size={14} />, value: '4+', label: 'Años de experiencia' },
             { icon: <Star size={14} />, value: '2+', label: 'Proyectos completados' },
-            { icon: <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', fontWeight: 900 }}>{'</>'}</span>, value: '100%', label: 'Comprometido' },
+            { icon: <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', fontWeight: 'var(--font-black)' }}>{'</>'}</span>, value: '100%', label: 'Comprometido' },
           ].map((s) => (
             <div key={s.label} className="hero-mobile-stat-card">
               <div
                 style={{
                   width: '28px', height: '28px', borderRadius: '0.4rem',
-                  background: 'rgba(79,111,174,0.15)', border: '1px solid rgba(102,132,196,0.2)',
+                  background: 'var(--accent-glow)', border: '1px solid rgba(102,132,196,0.2)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   color: 'var(--accent-bright)', flexShrink: 0,
                 }}
@@ -286,7 +232,7 @@ export default function Hero({ onNavigate }: Props) {
                 {s.icon}
               </div>
               <div>
-                <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--text)', lineHeight: 1 }}>{s.value}</div>
+                <div style={{ fontSize: '0.9rem', fontWeight: 'var(--font-extrabold)', color: 'var(--text)', lineHeight: 1 }}>{s.value}</div>
                 <div style={{ fontSize: '0.58rem', color: 'var(--text-soft)', marginTop: '0.1rem' }}>{s.label}</div>
               </div>
             </div>
@@ -310,7 +256,7 @@ export default function Hero({ onNavigate }: Props) {
             zIndex: 4,
             background: 'rgba(10,10,30,0.88)',
             border: '1px solid rgba(255,255,255,0.1)',
-            borderRadius: '0.875rem',
+            borderRadius: 'var(--radius-md)',
             padding: '0.875rem 1rem',
             backdropFilter: 'blur(14px)',
             boxShadow: '0 12px 40px rgba(0,0,0,0.5)',
@@ -320,14 +266,14 @@ export default function Hero({ onNavigate }: Props) {
         >
           {/* Window dots */}
           <div style={{ display: 'flex', gap: '0.35rem', marginBottom: '0.625rem' }}>
-            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ef4444' }} />
-            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#f59e0b' }} />
-            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e' }} />
+            <div style={{ width: '8px', height: '8px', borderRadius: 'var(--radius-full)', background: 'var(--danger)' }} />
+            <div style={{ width: '8px', height: '8px', borderRadius: 'var(--radius-full)', background: 'var(--warning)' }} />
+            <div style={{ width: '8px', height: '8px', borderRadius: 'var(--radius-full)', background: 'var(--success)' }} />
           </div>
           <div style={{ fontSize: '0.62rem', lineHeight: 1.7 }}>
             <div>
-              <span style={{ color: '#6684C4' }}>def </span>
-              <span style={{ color: '#A8B2C5' }}>construir_sistemas</span>
+              <span style={{ color: 'var(--accent-bright)' }}>def </span>
+              <span style={{ color: 'rgba(255,255,255,0.65)' }}>construir_sistemas</span>
               <span style={{ color: 'rgba(255,255,255,0.5)' }}>():</span>
             </div>
             <div style={{ paddingLeft: '1rem' }}>
@@ -339,7 +285,7 @@ export default function Hero({ onNavigate }: Props) {
             ))}
             <div style={{ paddingLeft: '1rem', color: 'rgba(255,255,255,0.5)' }}>]</div>
             <div style={{ paddingLeft: '1rem' }}>
-              <span style={{ color: '#6684C4' }}>return </span>
+              <span style={{ color: 'var(--accent-bright)' }}>return </span>
               <span style={{ color: '#7dd3fc' }}>soluciones</span>
             </div>
             <div style={{ color: 'rgba(255,255,255,0.3)', marginTop: '0.2rem' }}># Soluciones que generan impacto</div>
@@ -359,7 +305,7 @@ export default function Hero({ onNavigate }: Props) {
             zIndex: 4,
             width: '52px',
             height: '52px',
-            borderRadius: '0.75rem',
+            borderRadius: 'var(--radius-md)',
             background: 'rgba(10,10,30,0.85)',
             border: '1px solid rgba(255,255,255,0.1)',
             backdropFilter: 'blur(10px)',
@@ -368,7 +314,7 @@ export default function Hero({ onNavigate }: Props) {
             justifyContent: 'center',
             fontFamily: 'var(--font-mono)',
             fontSize: '0.75rem',
-            fontWeight: 700,
+            fontWeight: 'var(--font-bold)',
             color: 'var(--accent-bright)',
           }}
         >
@@ -392,7 +338,7 @@ export default function Hero({ onNavigate }: Props) {
             padding: '0.625rem 0.875rem',
             background: 'rgba(10,10,30,0.88)',
             border: '1px solid rgba(255,255,255,0.1)',
-            borderRadius: '0.875rem',
+            borderRadius: 'var(--radius-md)',
             backdropFilter: 'blur(14px)',
             boxShadow: '0 8px 30px rgba(0,0,0,0.4)',
           }}
@@ -401,7 +347,7 @@ export default function Hero({ onNavigate }: Props) {
             style={{
               width: '34px',
               height: '34px',
-              borderRadius: '50%',
+              borderRadius: 'var(--radius-full)',
               background: 'rgba(79,111,174,0.2)',
               border: '1px solid rgba(102,132,196,0.35)',
               display: 'flex',
@@ -413,20 +359,20 @@ export default function Hero({ onNavigate }: Props) {
             🚀
           </div>
           <div>
-            <div style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text)' }}>Disponible para</div>
-            <div style={{ fontSize: '0.65rem', color: 'var(--text-soft)' }}>proyectos</div>
+            <div style={{ fontSize: '0.7rem', fontWeight: 'var(--font-bold)', color: '#fff' }}>Disponible para</div>
+            <div style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.65)' }}>proyectos</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', marginTop: '0.15rem' }}>
               <div
                 style={{
                   width: '6px',
                   height: '6px',
-                  borderRadius: '50%',
-                  background: '#22c55e',
-                  boxShadow: '0 0 6px #22c55e',
+                  borderRadius: 'var(--radius-full)',
+                  background: 'var(--success)',
+                  boxShadow: '0 0 6px var(--success)',
                   animation: 'pulseDot 2s ease-in-out infinite',
                 }}
               />
-              <span style={{ fontSize: '0.58rem', color: '#22c55e', fontWeight: 600 }}>nuevos desafíos</span>
+              <span style={{ fontSize: '0.58rem', color: 'var(--success)', fontWeight: 'var(--font-medium)' }}>nuevos desafíos</span>
             </div>
           </div>
         </motion.div>
@@ -444,7 +390,7 @@ export default function Hero({ onNavigate }: Props) {
             zIndex: 4,
             fontFamily: 'var(--font-mono)',
             fontSize: '3.5rem',
-            fontWeight: 900,
+            fontWeight: 'var(--font-black)',
             color: 'transparent',
             WebkitTextStroke: '2px rgba(79,111,174,0.6)',
             letterSpacing: '-0.04em',
@@ -475,7 +421,7 @@ export default function Hero({ onNavigate }: Props) {
           {[
             { icon: <Briefcase size={16} />, value: '4+', label: 'Años de experiencia' },
             { icon: <Star size={16} />, value: '2+', label: 'Proyectos completados' },
-            { icon: <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', fontWeight: 900 }}>{'</>'}</span>, value: '100%', label: 'Comprometido' },
+            { icon: <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', fontWeight: 'var(--font-black)' }}>{'</>'}</span>, value: '100%', label: 'Comprometido' },
           ].map((s) => (
             <div
               key={s.label}
@@ -486,7 +432,7 @@ export default function Hero({ onNavigate }: Props) {
                 padding: '0.625rem 0.875rem',
                 background: 'rgba(10,10,30,0.88)',
                 border: '1px solid rgba(255,255,255,0.08)',
-                borderRadius: '0.75rem',
+                borderRadius: 'var(--radius-md)',
                 backdropFilter: 'blur(14px)',
                 minWidth: '175px',
               }}
@@ -495,8 +441,8 @@ export default function Hero({ onNavigate }: Props) {
                 style={{
                   width: '32px',
                   height: '32px',
-                  borderRadius: '0.5rem',
-                  background: 'rgba(79,111,174,0.15)',
+                  borderRadius: 'var(--radius-sm)',
+                  background: 'var(--accent-glow)',
                   border: '1px solid rgba(102,132,196,0.2)',
                   display: 'flex',
                   alignItems: 'center',
@@ -508,8 +454,8 @@ export default function Hero({ onNavigate }: Props) {
                 {s.icon}
               </div>
               <div>
-                <div style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--text)', lineHeight: 1 }}>{s.value}</div>
-                <div style={{ fontSize: '0.62rem', color: 'var(--text-soft)', marginTop: '0.15rem' }}>{s.label}</div>
+                <div style={{ fontSize: '0.95rem', fontWeight: 'var(--font-extrabold)', color: '#fff', lineHeight: 1 }}>{s.value}</div>
+                <div style={{ fontSize: '0.62rem', color: 'rgba(255,255,255,0.65)', marginTop: '0.15rem' }}>{s.label}</div>
               </div>
             </div>
           ))}
@@ -541,7 +487,7 @@ export default function Hero({ onNavigate }: Props) {
           left: '38%',
           width: '500px',
           height: '500px',
-          borderRadius: '50%',
+          borderRadius: 'var(--radius-full)',
           background: 'radial-gradient(circle, rgba(79,111,174,0.06) 0%, transparent 70%)',
           pointerEvents: 'none',
           zIndex: 0,

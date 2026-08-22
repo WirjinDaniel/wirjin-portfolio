@@ -1,0 +1,30 @@
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition:
+    box-shadow var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard);
+}
+
+/* ── Padding ── */
+.p-none { padding: 0; }
+.p-sm { padding: var(--space-3); }
+.p-md { padding: var(--space-4); }
+.p-lg { padding: var(--space-5); }
+
+/* ── Radius ── */
+.r-md { border-radius: var(--radius-md); }
+.r-lg { border-radius: var(--radius-lg); }
+.r-xl { border-radius: var(--radius-xl); }
+
+/* ── Hover glow ── */
+.glow-md:hover {
+  border-color: rgba(102, 132, 196, 0.3);
+  box-shadow: 0 0 24px var(--accent-glow);
+}
+
+.glow-lg:hover {
+  border-color: rgba(102, 132, 196, 0.38);
+  box-shadow: 0 0 60px rgba(79, 111, 174, 0.2);
+}

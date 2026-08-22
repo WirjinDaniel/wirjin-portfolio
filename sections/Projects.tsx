@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ArrowRight, Briefcase, Users, Code2, Rocket, Grid3X3 } from 'lucide-react';
 import Section from '@/components/Section';
+import Button from '@/components/Button';
+import Card from '@/components/Card';
 
 const projects = [
   {
@@ -13,7 +15,7 @@ const projects = [
     tags: ['Django', 'DRF', 'React', 'SQL Server'],
     image: '/Viaticos dashordad .png',
     status: 'Operativo',
-    statusColor: '#22c55e',
+    statusColor: 'var(--success)',
     fill: 96,
   },
   {
@@ -23,7 +25,7 @@ const projects = [
     tags: ['Django', 'PostgreSQL', 'Tailwind'],
     image: '/investario.png',
     status: 'En desarrollo',
-    statusColor: '#f59e0b',
+    statusColor: 'var(--warning)',
     fill: 55,
   },
 ];
@@ -43,10 +45,10 @@ export default function Projects() {
         {/* Header */}
         <div className="projects-header">
           <div>
-            <div style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.2em', color: 'var(--accent)', marginBottom: '0.5rem' }}>
+            <div style={{ fontSize: '0.65rem', fontWeight: 'var(--font-bold)', letterSpacing: '0.2em', color: 'var(--accent-bright)', marginBottom: '0.5rem' }}>
               PORTAFOLIO
             </div>
-            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05 }}>
+            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', fontWeight: 'var(--font-black)', letterSpacing: '-0.03em', lineHeight: 1.05 }}>
               PROYECTOS{' '}
               <span className="glow-text">DESTACADOS</span>
             </h2>
@@ -58,69 +60,28 @@ export default function Projects() {
           </div>
 
           {/* "Ver todos los proyectos" button */}
-          <button
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.625rem',
-              padding: '0.7rem 1.25rem',
-              background: 'rgba(79,111,174,0.1)',
-              border: '1px solid var(--border)',
-              borderRadius: '0.625rem',
-              color: 'var(--text)',
-              fontSize: '0.8rem',
-              fontWeight: 600,
-              cursor: 'pointer',
-              whiteSpace: 'nowrap',
-              transition: 'border-color 0.2s, box-shadow 0.2s',
-              flexShrink: 0,
-            }}
-            onMouseEnter={(e) => {
-              const b = e.currentTarget as HTMLButtonElement;
-              b.style.borderColor = 'var(--accent)';
-              b.style.boxShadow = '0 0 20px rgba(79,111,174,0.16)';
-            }}
-            onMouseLeave={(e) => {
-              const b = e.currentTarget as HTMLButtonElement;
-              b.style.borderColor = 'var(--border)';
-              b.style.boxShadow = 'none';
-            }}
-          >
+          <Button variant="secondary" style={{ flexShrink: 0 }}>
             <Grid3X3 size={15} />
             Ver todos los proyectos
             <ArrowRight size={14} />
-          </button>
+          </Button>
         </div>
 
         {/* Project cards */}
         <div className="formation-2col" style={{ gap: '1.5rem' }}>
           {projects.map((p, i) => (
-            <motion.article
+            <Card
+              as="article"
               key={p.title}
+              padding="none"
+              radius="xl"
+              glow="lg"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
               whileHover={{ y: -6 }}
-              style={{
-                background: 'var(--bg-card)',
-                border: '1px solid var(--border)',
-                borderRadius: '1.25rem',
-                overflow: 'hidden',
-                display: 'flex',
-                flexDirection: 'column',
-                transition: 'box-shadow 0.3s, border-color 0.3s',
-              }}
-              onMouseEnter={(e) => {
-                const d = e.currentTarget as HTMLElement;
-                d.style.boxShadow = '0 12px 60px rgba(79,111,174,0.2)';
-                d.style.borderColor = 'rgba(102,132,196,0.38)';
-              }}
-              onMouseLeave={(e) => {
-                const d = e.currentTarget as HTMLElement;
-                d.style.boxShadow = 'none';
-                d.style.borderColor = 'var(--border)';
-              }}
+              style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
             >
               {/* Dashboard screenshot */}
               <div
@@ -155,18 +116,18 @@ export default function Projects() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <div
                     style={{
-                      width: '8px', height: '8px', borderRadius: '50%',
+                      width: '8px', height: '8px', borderRadius: 'var(--radius-full)',
                       background: p.statusColor,
                       boxShadow: `0 0 8px ${p.statusColor}`,
                     }}
                   />
-                  <span style={{ fontSize: '0.72rem', fontWeight: 700, color: p.statusColor }}>
+                  <span style={{ fontSize: '0.72rem', fontWeight: 'var(--font-bold)', color: p.statusColor }}>
                     {p.status}
                   </span>
                 </div>
 
                 {/* Title */}
-                <h3 style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', fontWeight: 800, lineHeight: 1.2, color: 'var(--text)' }}>
+                <h3 style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', fontWeight: 'var(--font-extrabold)', lineHeight: 1.2, color: 'var(--text)' }}>
                   {p.title}
                 </h3>
 
@@ -179,9 +140,9 @@ export default function Projects() {
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', marginBottom: '0.5rem' }}>
                     <span style={{ color: 'var(--text-soft)' }}>Avance del proyecto</span>
-                    <span style={{ color: 'var(--accent-bright)', fontWeight: 800, fontSize: '0.9rem' }}>{p.fill}%</span>
+                    <span style={{ color: 'var(--accent-bright)', fontWeight: 'var(--font-extrabold)', fontSize: '0.9rem' }}>{p.fill}%</span>
                   </div>
-                  <div style={{ height: '4px', background: 'rgba(255,255,255,0.07)', borderRadius: '99px', overflow: 'hidden' }}>
+                  <div style={{ height: '4px', background: 'rgba(255,255,255,0.07)', borderRadius: 'var(--radius-full)', overflow: 'hidden' }}>
                     <motion.div
                       initial={{ width: 0 }}
                       whileInView={{ width: `${p.fill}%` }}
@@ -189,8 +150,8 @@ export default function Projects() {
                       transition={{ duration: 1, delay: 0.3 + i * 0.15, ease: 'easeOut' }}
                       style={{
                         height: '100%',
-                        background: 'linear-gradient(90deg, #4F6FAE, #6684C4)',
-                        borderRadius: '99px',
+                        background: 'linear-gradient(90deg, var(--accent), var(--accent-bright))',
+                        borderRadius: 'var(--radius-full)',
                       }}
                     />
                   </div>
@@ -204,12 +165,12 @@ export default function Projects() {
                         key={t}
                         style={{
                           fontSize: '0.7rem',
-                          fontWeight: 600,
+                          fontWeight: 'var(--font-medium)',
                           color: 'var(--text)',
                           background: 'rgba(255,255,255,0.06)',
                           border: '1px solid rgba(255,255,255,0.1)',
                           padding: '0.3rem 0.75rem',
-                          borderRadius: '99px',
+                          borderRadius: 'var(--radius-full)',
                         }}
                       >
                         {t}
@@ -217,37 +178,12 @@ export default function Projects() {
                     ))}
                   </div>
 
-                  <button
-                    style={{
-                      width: '40px',
-                      height: '40px',
-                      borderRadius: '50%',
-                      background: 'linear-gradient(135deg, var(--accent), var(--accent-bright))',
-                      border: 'none',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      color: '#fff',
-                      flexShrink: 0,
-                      transition: 'box-shadow 0.2s, transform 0.2s',
-                    }}
-                    onMouseEnter={(e) => {
-                      const b = e.currentTarget as HTMLButtonElement;
-                      b.style.boxShadow = '0 0 20px rgba(79,111,174,0.4)';
-                      b.style.transform = 'scale(1.1)';
-                    }}
-                    onMouseLeave={(e) => {
-                      const b = e.currentTarget as HTMLButtonElement;
-                      b.style.boxShadow = 'none';
-                      b.style.transform = 'scale(1)';
-                    }}
-                  >
+                  <Button variant="icon" aria-label={`Ver detalles de ${p.title}`}>
                     <ArrowRight size={16} />
-                  </button>
+                  </Button>
                 </div>
               </div>
-            </motion.article>
+            </Card>
           ))}
         </div>
 
@@ -267,12 +203,12 @@ export default function Projects() {
                 padding: '1rem 1.125rem',
                 background: 'rgba(79,111,174,0.07)',
                 border: '1px solid var(--border)',
-                borderRadius: '0.875rem',
+                borderRadius: 'var(--radius-md)',
               }}
             >
               <div
                 style={{
-                  width: '44px', height: '44px', borderRadius: '0.75rem',
+                  width: '44px', height: '44px', borderRadius: 'var(--radius-md)',
                   background: 'linear-gradient(135deg, rgba(79,111,174,0.32), rgba(102,132,196,0.18))',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   color: '#fff', flexShrink: 0,
@@ -281,7 +217,7 @@ export default function Projects() {
                 <Icon size={20} />
               </div>
               <div>
-                <div style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text)', lineHeight: 1 }}>{value}</div>
+                <div style={{ fontSize: '1rem', fontWeight: 'var(--font-extrabold)', color: 'var(--text)', lineHeight: 1 }}>{value}</div>
                 <div style={{ fontSize: '0.65rem', color: 'var(--text-soft)', marginTop: '0.2rem', lineHeight: 1.4 }}>{label}</div>
               </div>
             </motion.div>

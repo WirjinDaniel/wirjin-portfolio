@@ -58,18 +58,20 @@ export default function Home() {
 
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'hidden', background: 'var(--bg)' }}>
+      <a href="#main-content" className="skip-link">Saltar al contenido</a>
+
       {/* Left sidebar */}
       <Navbar activeSection={activeSection} onNavigate={navigateTo} />
 
       {/* Main content */}
-      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', position: 'relative' }}>
+      <main id="main-content" ref={scrollRef} style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', position: 'relative' }}>
         <Hero onNavigate={navigateTo} />
         <About />
         <Skills />
         <Projects />
         <Formation />
         <Contact />
-      </div>
+      </main>
 
       {/* Right nav */}
       <RightNav activeSection={activeSection} onNavigate={navigateTo} />
@@ -103,8 +105,9 @@ function MobileNav({
   };
 
   return (
-    <div
+    <nav
       className="mobile-nav"
+      aria-label="Navegación móvil"
       style={{
         position: 'fixed',
         bottom: 0,
@@ -130,14 +133,17 @@ function MobileNav({
               border: 'none',
               color: isActive ? 'var(--accent-bright)' : 'var(--text-soft)',
               fontSize: '0.6rem',
-              fontWeight: isActive ? 700 : 400,
+              fontWeight: isActive ? 'var(--font-bold)' : 'var(--font-regular)',
               cursor: 'pointer',
               padding: '0.4rem 0.5rem',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              justifyContent: 'center',
               gap: '0.2rem',
-              transition: 'color 0.2s',
+              minWidth: '44px',
+              minHeight: '44px',
+              transition: 'color var(--duration-base) var(--ease-standard)',
             }}
           >
             <Icon size={14} />
@@ -159,13 +165,16 @@ function MobileNav({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          justifyContent: 'center',
           gap: '0.2rem',
-          transition: 'color 0.2s',
+          minWidth: '44px',
+          minHeight: '44px',
+          transition: 'color var(--duration-base) var(--ease-standard)',
         }}
       >
         <Moon size={14} />
         {theme === 'dark' ? 'Oscuro' : 'Claro'}
       </button>
-    </div>
+    </nav>
   );
 }

@@ -16,9 +16,21 @@ const LinkedinIcon = () => (
   </svg>
 );
 
+// Windows no renderiza el emoji de bandera 🇩🇴 (muestra "DO" en texto), por eso se dibuja como SVG.
+const DrFlagIcon = () => (
+  <svg width="16" height="12" viewBox="0 0 20 14" style={{ flexShrink: 0, borderRadius: '2px' }}>
+    <rect width="20" height="14" fill="#fff" />
+    <rect width="9" height="6" fill="#002D62" />
+    <rect x="11" width="9" height="6" fill="#CE1126" />
+    <rect y="8" width="9" height="6" fill="#CE1126" />
+    <rect x="11" y="8" width="9" height="6" fill="#002D62" />
+    <circle cx="10" cy="7" r="2" fill="#fff" stroke="#CE1126" strokeWidth="0.5" />
+  </svg>
+);
+
 const contactInfo = [
-  { icon: Mail, label: 'EMAIL', value: 'danielsanchezamancio1996@gmail.com', href: 'mailto:danielsanchezamancio1996@gmail.com' },
-  { icon: MapPin, label: 'UBICACIÓN', value: 'Santo Domingo, RD', href: null },
+  { icon: Mail, label: 'EMAIL', value: 'danielsanchezamancio1996@gmail.com', href: 'mailto:danielsanchezamancio1996@gmail.com', flag: false },
+  { icon: MapPin, label: 'UBICACIÓN', value: 'República Dominicana', href: null, flag: true },
 ];
 
 const socials = [
@@ -37,10 +49,10 @@ export default function Contact() {
 
           {/* Title */}
           <div>
-            <div style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.2em', color: 'var(--accent)', marginBottom: '0.625rem' }}>
+            <div style={{ fontSize: '0.65rem', fontWeight: 'var(--font-bold)', letterSpacing: '0.2em', color: 'var(--accent-bright)', marginBottom: '0.625rem' }}>
               TRABAJEMOS JUNTOS
             </div>
-            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05 }}>
+            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', fontWeight: 'var(--font-black)', letterSpacing: '-0.03em', lineHeight: 1.05 }}>
               <span style={{ color: 'var(--text)' }}>CON</span>
               <span className="glow-text">TACTO</span>
             </h2>
@@ -53,9 +65,12 @@ export default function Contact() {
 
           {/* Info cards */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            {contactInfo.map(({ icon: Icon, label, value, href }, i) => (
-              <motion.div
+            {contactInfo.map(({ icon: Icon, label, value, href, flag }, i) => {
+              const CardTag = href ? motion.a : motion.div;
+              return (
+              <CardTag
                 key={label}
+                {...(href ? { href, target: href.startsWith('mailto') ? undefined : '_blank', rel: 'noopener noreferrer' } : {})}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -67,27 +82,27 @@ export default function Contact() {
                   padding: '0.875rem 1rem',
                   background: 'rgba(255,255,255,0.03)',
                   border: '1px solid var(--border)',
-                  borderRadius: '0.875rem',
-                  transition: 'border-color 0.2s, background 0.2s',
+                  borderRadius: 'var(--radius-md)',
+                  transition: 'border-color var(--duration-base) var(--ease-standard), background var(--duration-base) var(--ease-standard)',
                   cursor: href ? 'pointer' : 'default',
+                  textDecoration: 'none',
                 }}
                 whileHover={{ scale: 1.01 }}
                 onMouseEnter={(e) => {
-                  const d = e.currentTarget as HTMLDivElement;
+                  const d = e.currentTarget as HTMLElement;
                   d.style.borderColor = 'rgba(102,132,196,0.3)';
                   d.style.background = 'rgba(79,111,174,0.05)';
                 }}
                 onMouseLeave={(e) => {
-                  const d = e.currentTarget as HTMLDivElement;
+                  const d = e.currentTarget as HTMLElement;
                   d.style.borderColor = 'var(--border)';
                   d.style.background = 'rgba(255,255,255,0.03)';
                 }}
-                onClick={() => href && window.open(href)}
               >
                 {/* Icon box */}
                 <div
                   style={{
-                    width: '40px', height: '40px', borderRadius: '0.625rem',
+                    width: '40px', height: '40px', borderRadius: 'var(--radius-sm)',
                     background: 'rgba(79,111,174,0.12)', border: '1px solid rgba(79,111,174,0.16)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     color: 'var(--accent-bright)', flexShrink: 0,
@@ -98,10 +113,11 @@ export default function Contact() {
 
                 {/* Text */}
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.15em', color: 'var(--accent-bright)', marginBottom: '0.15rem' }}>
+                  <div style={{ fontSize: '0.6rem', fontWeight: 'var(--font-bold)', letterSpacing: '0.15em', color: 'var(--accent-bright)', marginBottom: '0.15rem' }}>
                     {label}
                   </div>
-                  <div style={{ fontSize: '0.82rem', color: 'var(--text)', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem', color: 'var(--text)', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {flag && <DrFlagIcon />}
                     {value}
                   </div>
                 </div>
@@ -112,13 +128,14 @@ export default function Contact() {
                     <ArrowRight size={15} />
                   </div>
                 )}
-              </motion.div>
-            ))}
+              </CardTag>
+              );
+            })}
           </div>
 
           {/* Social links — hidden on mobile, shown after form */}
           <div className="contact-socials-desktop">
-            <div style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.15em', color: 'var(--text-soft)', marginBottom: '0.875rem' }}>
+            <div style={{ fontSize: '0.65rem', fontWeight: 'var(--font-bold)', letterSpacing: '0.15em', color: 'var(--text-soft)', marginBottom: '0.875rem' }}>
               SÍGUEME EN
             </div>
             <div style={{ display: 'flex', gap: '0.75rem' }}>
@@ -130,12 +147,12 @@ export default function Contact() {
                   rel="noopener noreferrer"
                   aria-label={label}
                   style={{
-                    width: '42px', height: '42px', borderRadius: '50%',
+                    width: '44px', height: '44px', borderRadius: 'var(--radius-full)',
                     background: 'rgba(255,255,255,0.05)',
                     border: '1px solid var(--border)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     color: 'var(--text-soft)', textDecoration: 'none',
-                    transition: 'color 0.2s, border-color 0.2s, background 0.2s, box-shadow 0.2s',
+                    transition: 'color var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard), background var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard)',
                   }}
                   onMouseEnter={(e) => {
                     const a = e.currentTarget as HTMLAnchorElement;
@@ -173,12 +190,12 @@ export default function Contact() {
             position: 'absolute', top: 0, right: 0,
             display: 'flex', alignItems: 'center', gap: '0.4rem',
             padding: '0.35rem 0.85rem',
-            background: 'rgba(34,197,94,0.1)',
-            border: '1px solid rgba(34,197,94,0.3)',
-            borderRadius: '999px',
-            fontSize: '0.75rem', fontWeight: 700, color: '#4ade80',
+            background: 'var(--success-bg)',
+            border: '1px solid var(--success-border)',
+            borderRadius: 'var(--radius-full)',
+            fontSize: '0.75rem', fontWeight: 'var(--font-bold)', color: '#4ade80',
           }}>
-            <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 6px #22c55e', animation: 'pulseDot 2s infinite' }} />
+            <div style={{ width: '7px', height: '7px', borderRadius: 'var(--radius-full)', background: 'var(--success)', boxShadow: '0 0 6px var(--success)', animation: 'pulseDot 2s infinite' }} />
             Online
           </div>
 
@@ -186,7 +203,7 @@ export default function Contact() {
           <div style={{
             background: 'linear-gradient(160deg, #0d1525 0%, #080c18 100%)',
             border: '1px solid rgba(79,111,174,0.25)',
-            borderRadius: '1rem',
+            borderRadius: 'var(--radius-lg)',
             overflow: 'hidden',
             boxShadow: '0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04)',
           }}>
@@ -197,14 +214,14 @@ export default function Contact() {
               borderBottom: '1px solid rgba(255,255,255,0.06)',
               background: 'rgba(255,255,255,0.02)',
             }}>
-              <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ef4444' }} />
-              <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#f59e0b' }} />
-              <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#22c55e' }} />
+              <div style={{ width: '10px', height: '10px', borderRadius: 'var(--radius-full)', background: 'var(--danger)' }} />
+              <div style={{ width: '10px', height: '10px', borderRadius: 'var(--radius-full)', background: 'var(--warning)' }} />
+              <div style={{ width: '10px', height: '10px', borderRadius: 'var(--radius-full)', background: 'var(--success)' }} />
               <div style={{
                 marginLeft: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem',
-                fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)',
+                fontSize: '0.72rem', color: 'var(--text-soft)', fontFamily: 'var(--font-mono)',
               }}>
-                <span style={{ color: 'var(--accent-bright)', fontWeight: 700 }}>{'</>'}</span>
+                <span style={{ color: 'var(--accent-bright)', fontWeight: 'var(--font-bold)' }}>{'</>'}</span>
                 contacto.js
               </div>
             </div>
@@ -212,7 +229,7 @@ export default function Contact() {
             {/* Code body */}
             <div style={{ padding: '1.5rem 1.25rem', fontFamily: 'var(--font-mono)', fontSize: '0.88rem', lineHeight: 2 }}>
               {[
-                { n: 1, content: <><span style={{ color: '#6684C4' }}>const </span><span style={{ color: '#7dd3fc' }}>contacto</span><span style={{ color: 'rgba(255,255,255,0.35)' }}> = {'{'}</span></> },
+                { n: 1, content: <><span style={{ color: 'var(--accent-bright)' }}>const </span><span style={{ color: '#7dd3fc' }}>contacto</span><span style={{ color: 'rgba(255,255,255,0.35)' }}> = {'{'}</span></> },
                 { n: 2, content: <><span style={{ paddingLeft: '1.5rem', display: 'inline-block' }}><span style={{ color: '#86efac' }}>nombre</span><span style={{ color: 'rgba(255,255,255,0.35)' }}>: </span><span style={{ color: '#fde68a' }}>&quot;Wirjin&quot;</span><span style={{ color: 'rgba(255,255,255,0.35)' }}>,</span></span></> },
                 { n: 3, content: <><span style={{ paddingLeft: '1.5rem', display: 'inline-block' }}><span style={{ color: '#86efac' }}>estado</span><span style={{ color: 'rgba(255,255,255,0.35)' }}>: </span><span style={{ color: '#4ade80' }}>&quot;Disponible&quot;</span><span style={{ color: 'rgba(255,255,255,0.35)' }}>,</span></span></> },
                 { n: 5, content: <><span style={{ paddingLeft: '1.5rem', display: 'inline-block' }}><span style={{ color: '#86efac' }}>mensaje</span><span style={{ color: 'rgba(255,255,255,0.35)' }}>: </span><span style={{ color: '#f9a8d4' }}>&quot;¡Hablemos!&quot;</span><span style={{ color: 'rgba(255,255,255,0.35)' }}>,</span></span></> },
@@ -227,7 +244,7 @@ export default function Contact() {
               {/* Cursor */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: '0.25rem' }}>
                 <span style={{ color: 'rgba(255,255,255,0.18)', userSelect: 'none', minWidth: '1ch' }}>8</span>
-                <span style={{ color: '#6684C4' }}>▸</span>
+                <span style={{ color: 'var(--accent-bright)' }}>▸</span>
                 <div style={{ width: '7px', height: '14px', background: 'var(--accent-bright)', animation: 'pulseDot 1s ease-in-out infinite' }} />
               </div>
             </div>
@@ -258,8 +275,8 @@ export default function Contact() {
                   fontFamily: 'Georgia, serif',
                   fontStyle: 'italic',
                   fontSize: '1.5rem',
-                  fontWeight: 400,
-                  background: 'linear-gradient(135deg, rgba(255,255,255,0.75) 0%, var(--accent-bright) 100%)',
+                  fontWeight: 'var(--font-regular)',
+                  background: 'linear-gradient(135deg, var(--text-soft) 0%, var(--accent-bright) 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -275,7 +292,7 @@ export default function Contact() {
 
         {/* ── Mobile-only: socials after form ── */}
         <div className="contact-socials-mobile">
-          <div style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.15em', color: 'var(--text-soft)', marginBottom: '0.875rem' }}>
+          <div style={{ fontSize: '0.65rem', fontWeight: 'var(--font-bold)', letterSpacing: '0.15em', color: 'var(--text-soft)', marginBottom: '0.875rem' }}>
             SÍGUEME EN
           </div>
           <div style={{ display: 'flex', gap: '0.75rem' }}>
@@ -287,12 +304,12 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 aria-label={label}
                 style={{
-                  width: '42px', height: '42px', borderRadius: '50%',
+                  width: '44px', height: '44px', borderRadius: 'var(--radius-full)',
                   background: 'rgba(255,255,255,0.05)',
                   border: '1px solid var(--border)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   color: 'var(--text-soft)', textDecoration: 'none',
-                  transition: 'color 0.2s, border-color 0.2s, background 0.2s, box-shadow 0.2s',
+                  transition: 'color var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard), background var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard)',
                 }}
                 onMouseEnter={(e) => {
                   const a = e.currentTarget as HTMLAnchorElement;

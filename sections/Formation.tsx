@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ExternalLink, GraduationCap, Award, BookOpen, Star } from 'lucide-react';
 import Section from '@/components/Section';
+import Card from '@/components/Card';
 
 const education = [
   {
@@ -106,10 +107,10 @@ export default function Formation() {
         {/* Header */}
         <div className="projects-header">
           <div>
-            <div style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.2em', color: 'var(--accent)', marginBottom: '0.5rem' }}>
+            <div style={{ fontSize: '0.65rem', fontWeight: 'var(--font-bold)', letterSpacing: '0.2em', color: 'var(--accent-bright)', marginBottom: '0.5rem' }}>
               MI CAMINO DE APRENDIZAJE
             </div>
-            <h2 style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1.1 }}>
+            <h2 style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', fontWeight: 'var(--font-black)', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
               FORMACIÓN Y{' '}
               <span className="glow-text">CERTIFICACIONES</span>
             </h2>
@@ -124,7 +125,7 @@ export default function Formation() {
             style={{
               width: '100px',
               height: '100px',
-              borderRadius: '50%',
+              borderRadius: 'var(--radius-full)',
               background: 'radial-gradient(circle, rgba(79,111,174,0.16) 0%, transparent 70%)',
               display: 'flex',
               alignItems: 'center',
@@ -156,7 +157,7 @@ export default function Formation() {
                 style={{
                   width: '30px',
                   height: '30px',
-                  borderRadius: '0.5rem',
+                  borderRadius: 'var(--radius-sm)',
                   background: 'rgba(79,111,174,0.12)',
                   border: '1px solid var(--border)',
                   display: 'flex',
@@ -167,10 +168,10 @@ export default function Formation() {
               >
                 <GraduationCap size={15} />
               </div>
-              <span style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.12em', color: 'var(--text)' }}>
+              <span style={{ fontSize: '0.78rem', fontWeight: 'var(--font-bold)', letterSpacing: '0.12em', color: 'var(--text)' }}>
                 EDUCACIÓN ACADÉMICA
               </span>
-              <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-bright)', marginLeft: '0.25rem' }} />
+              <div style={{ width: '6px', height: '6px', borderRadius: 'var(--radius-full)', background: 'var(--accent-bright)', marginLeft: '0.25rem' }} />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
@@ -198,7 +199,7 @@ export default function Formation() {
                       top: '1.25rem',
                       width: '6px',
                       height: '6px',
-                      borderRadius: '50%',
+                      borderRadius: 'var(--radius-full)',
                       background: 'var(--accent)',
                     }}
                   />
@@ -208,14 +209,14 @@ export default function Formation() {
                     style={{
                       width: '40px',
                       height: '40px',
-                      borderRadius: '0.625rem',
+                      borderRadius: 'var(--radius-sm)',
                       background: 'rgba(79,111,174,0.08)',
                       border: '1px solid var(--border)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       fontSize: item.mono ? '0.6rem' : '1.1rem',
-                      fontWeight: item.mono ? 900 : 400,
+                      fontWeight: item.mono ? 'var(--font-black)' : 'var(--font-regular)',
                       fontFamily: item.mono ? 'var(--font-mono)' : undefined,
                       color: item.mono ? 'var(--accent-bright)' : undefined,
                       flexShrink: 0,
@@ -227,14 +228,14 @@ export default function Formation() {
                   {/* Content */}
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.5rem', marginBottom: '0.15rem' }}>
-                      <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--text)', lineHeight: 1.3 }}>
+                      <span style={{ fontSize: '0.82rem', fontWeight: 'var(--font-bold)', color: 'var(--text)', lineHeight: 1.3 }}>
                         {item.title}
                       </span>
                       <span style={{ fontSize: '0.6rem', color: 'var(--text-soft)', fontFamily: 'var(--font-mono)', flexShrink: 0 }}>
                         📅 {item.year}
                       </span>
                     </div>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--accent-bright)', fontWeight: 600, marginBottom: '0.25rem' }}>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--accent-bright)', fontWeight: 'var(--font-medium)', marginBottom: '0.25rem' }}>
                       {item.institution}
                     </div>
                     <p style={{ fontSize: '0.72rem', color: 'var(--text-soft)', lineHeight: 1.5 }}>
@@ -262,7 +263,7 @@ export default function Formation() {
                 style={{
                   width: '30px',
                   height: '30px',
-                  borderRadius: '0.5rem',
+                  borderRadius: 'var(--radius-sm)',
                   background: 'rgba(79,111,174,0.12)',
                   border: '1px solid var(--border)',
                   display: 'flex',
@@ -273,47 +274,31 @@ export default function Formation() {
               >
                 <Award size={15} />
               </div>
-              <span style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.12em', color: 'var(--text)' }}>
+              <span style={{ fontSize: '0.78rem', fontWeight: 'var(--font-bold)', letterSpacing: '0.12em', color: 'var(--text)' }}>
                 CERTIFICACIONES
               </span>
-              <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-bright)', marginLeft: '0.25rem' }} />
+              <div style={{ width: '6px', height: '6px', borderRadius: 'var(--radius-full)', background: 'var(--accent-bright)', marginLeft: '0.25rem' }} />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
               {certifications.map((cert, i) => (
-                <motion.div
+                <Card
                   key={i}
+                  padding="sm"
+                  radius="md"
+                  glow="md"
                   initial={{ opacity: 0, x: 15 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08 }}
-                  style={{
-                    display: 'flex',
-                    gap: '0.875rem',
-                    padding: '0.75rem',
-                    background: 'var(--bg-card)',
-                    border: '1px solid var(--border)',
-                    borderRadius: '0.75rem',
-                    alignItems: 'flex-start',
-                    transition: 'border-color 0.2s, box-shadow 0.2s',
-                  }}
-                  onMouseEnter={(e) => {
-                    const d = e.currentTarget as HTMLDivElement;
-                    d.style.borderColor = 'rgba(102,132,196,0.3)';
-                    d.style.boxShadow = '0 0 18px rgba(79,111,174,0.1)';
-                  }}
-                  onMouseLeave={(e) => {
-                    const d = e.currentTarget as HTMLDivElement;
-                    d.style.borderColor = 'var(--border)';
-                    d.style.boxShadow = 'none';
-                  }}
+                  style={{ display: 'flex', gap: '0.875rem', alignItems: 'flex-start' }}
                 >
                   {/* Tech icon */}
                   <div
                     style={{
                       width: '44px',
                       height: '44px',
-                      borderRadius: '0.625rem',
+                      borderRadius: 'var(--radius-sm)',
                       background: cert.iconBg,
                       display: 'flex',
                       alignItems: 'center',
@@ -331,7 +316,7 @@ export default function Formation() {
                   {/* Content */}
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.5rem' }}>
-                      <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--text)', lineHeight: 1.2 }}>
+                      <span style={{ fontSize: '0.82rem', fontWeight: 'var(--font-bold)', color: 'var(--text)', lineHeight: 1.2 }}>
                         {cert.title}
                       </span>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', flexShrink: 0 }}>
@@ -355,14 +340,14 @@ export default function Formation() {
                         </div>
                       </div>
                     </div>
-                    <div style={{ fontSize: '0.68rem', color: 'var(--accent-bright)', fontWeight: 600, marginTop: '0.1rem', marginBottom: '0.2rem' }}>
+                    <div style={{ fontSize: '0.68rem', color: 'var(--accent-bright)', fontWeight: 'var(--font-medium)', marginTop: '0.1rem', marginBottom: '0.2rem' }}>
                       {cert.platform}
                     </div>
                     <p style={{ fontSize: '0.7rem', color: 'var(--text-soft)', lineHeight: 1.4 }}>
                       {cert.description}
                     </p>
                   </div>
-                </motion.div>
+                </Card>
               ))}
             </div>
           </div>
@@ -380,7 +365,7 @@ export default function Formation() {
             padding: '1.25rem 1.75rem',
             background: 'var(--bg-card)',
             border: '1px solid var(--border)',
-            borderRadius: '1rem',
+            borderRadius: 'var(--radius-lg)',
           }}
         >
           {/* Quote */}
@@ -392,7 +377,7 @@ export default function Formation() {
               <p style={{ fontSize: '0.82rem', color: 'var(--text)', lineHeight: 1.6, fontStyle: 'italic' }}>
                 {quote}
               </p>
-              <p style={{ fontSize: '0.72rem', color: 'var(--accent-bright)', fontWeight: 600, marginTop: '0.3rem' }}>
+              <p style={{ fontSize: '0.72rem', color: 'var(--accent-bright)', fontWeight: 'var(--font-medium)', marginTop: '0.3rem' }}>
                 {quoteAuthor}
               </p>
             </div>
@@ -406,7 +391,7 @@ export default function Formation() {
                   style={{
                     width: '36px',
                     height: '36px',
-                    borderRadius: '0.5rem',
+                    borderRadius: 'var(--radius-sm)',
                     background: 'rgba(79,111,174,0.12)',
                     display: 'flex',
                     alignItems: 'center',
@@ -416,7 +401,7 @@ export default function Formation() {
                 >
                   <Icon size={16} />
                 </div>
-                <span style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text)', lineHeight: 1 }}>{value}</span>
+                <span style={{ fontSize: '1rem', fontWeight: 'var(--font-extrabold)', color: 'var(--text)', lineHeight: 1 }}>{value}</span>
                 <span style={{ fontSize: '0.6rem', color: 'var(--text-soft)', whiteSpace: 'pre-line', lineHeight: 1.3 }}>{label}</span>
               </div>
             ))}

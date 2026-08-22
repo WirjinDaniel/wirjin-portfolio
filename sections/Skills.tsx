@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Monitor, Database, Star, Brain, BarChart2, Lightbulb, Clock, Users, Heart } from 'lucide-react';
 import Section from '@/components/Section';
+import Card from '@/components/Card';
 
 /* ─── Circular progress SVG ─── */
 function CircleProgress({ value, size = 52 }: { value: number; size?: number }) {
@@ -30,14 +31,14 @@ function CircleProgress({ value, size = 52 }: { value: number; size?: number }) 
         />
         <defs>
           <linearGradient id="pg" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#4F6FAE" />
-            <stop offset="100%" stopColor="#6684C4" />
+            <stop offset="0%" stopColor="var(--accent)" />
+            <stop offset="100%" stopColor="var(--accent-bright)" />
           </linearGradient>
         </defs>
       </svg>
       <span style={{
         position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontSize: '0.6rem', fontWeight: 800, color: 'var(--accent-bright)', fontFamily: 'var(--font-mono)',
+        fontSize: '0.6rem', fontWeight: 'var(--font-extrabold)', color: 'var(--accent-bright)', fontFamily: 'var(--font-mono)',
       }}>
         {value}%
       </span>
@@ -48,13 +49,13 @@ function CircleProgress({ value, size = 52 }: { value: number; size?: number }) 
 /* ─── Bottom progress bar ─── */
 function BarProgress({ value, delay = 0 }: { value: number; delay?: number }) {
   return (
-    <div style={{ height: '3px', background: 'rgba(255,255,255,0.07)', borderRadius: '99px', overflow: 'hidden', marginTop: '0.75rem' }}>
+    <div style={{ height: '3px', background: 'rgba(255,255,255,0.07)', borderRadius: 'var(--radius-full)', overflow: 'hidden', marginTop: '0.75rem' }}>
       <motion.div
         initial={{ width: 0 }}
         whileInView={{ width: `${value}%` }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay, ease: 'easeOut' }}
-        style={{ height: '100%', background: 'linear-gradient(90deg, #4F6FAE, #6684C4)', borderRadius: '99px' }}
+        style={{ height: '100%', background: 'linear-gradient(90deg, var(--accent), var(--accent-bright))', borderRadius: 'var(--radius-full)' }}
       />
     </div>
   );
@@ -91,140 +92,89 @@ const aptitudes = [
 /* ─── Big skill card (backend/frontend) ─── */
 function BigCard({ img, text, iconBg, title, subtitle, level, desc, delay = 0 }: typeof backend[number] & { delay?: number }) {
   return (
-    <motion.div
+    <Card
+      padding="lg"
+      radius="lg"
+      glow="md"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay }}
       whileHover={{ y: -4 }}
-      style={{
-        background: 'var(--bg-card)',
-        border: '1px solid var(--border)',
-        borderRadius: '1rem',
-        padding: '1.125rem',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '0.75rem',
-        flex: 1,
-        transition: 'box-shadow 0.25s, border-color 0.25s',
-      }}
-      onMouseEnter={(e) => {
-        const d = e.currentTarget as HTMLDivElement;
-        d.style.boxShadow = '0 0 28px rgba(79,111,174,0.15)';
-        d.style.borderColor = 'rgba(102,132,196,0.35)';
-      }}
-      onMouseLeave={(e) => {
-        const d = e.currentTarget as HTMLDivElement;
-        d.style.boxShadow = 'none';
-        d.style.borderColor = 'var(--border)';
-      }}
+      style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', flex: 1 }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
           <div
             style={{
-              width: '48px', height: '48px', borderRadius: '0.75rem',
+              width: '48px', height: '48px', borderRadius: 'var(--radius-md)',
               background: iconBg, display: 'flex', alignItems: 'center', justifyContent: 'center',
               flexShrink: 0, overflow: 'hidden',
             }}
           >
             {img
               ? <Image src={img} alt={title} width={30} height={30} style={{ objectFit: 'contain' }} />
-              : <span style={{ fontSize: '0.6rem', fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#f87171' }}>{text}</span>
+              : <span style={{ fontSize: '0.6rem', fontWeight: 'var(--font-black)', fontFamily: 'var(--font-mono)', color: '#f87171' }}>{text}</span>
             }
           </div>
           <div>
-            <div style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--text)' }}>{title}</div>
-            <div style={{ fontSize: '0.68rem', color: 'var(--accent-bright)', fontWeight: 600, marginTop: '0.1rem' }}>{subtitle}</div>
+            <div style={{ fontSize: '0.875rem', fontWeight: 'var(--font-bold)', color: 'var(--text)' }}>{title}</div>
+            <div style={{ fontSize: '0.68rem', color: 'var(--accent-bright)', fontWeight: 'var(--font-medium)', marginTop: '0.1rem' }}>{subtitle}</div>
           </div>
         </div>
         <CircleProgress value={level} />
       </div>
       <p style={{ fontSize: '0.72rem', color: 'var(--text-soft)', lineHeight: 1.55 }}>{desc}</p>
       <BarProgress value={level} delay={delay + 0.2} />
-    </motion.div>
+    </Card>
   );
 }
 
 /* ─── Small DB card ─── */
 function SmallCard({ img, text, title, subtitle, level, delay = 0 }: typeof databases[number] & { delay?: number }) {
   return (
-    <motion.div
+    <Card
+      padding="md"
+      radius="md"
+      glow="md"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.35, delay }}
       whileHover={{ y: -3 }}
-      style={{
-        background: 'var(--bg-card)',
-        border: '1px solid var(--border)',
-        borderRadius: '0.875rem',
-        padding: '1rem',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '0.4rem',
-        flex: 1,
-        transition: 'box-shadow 0.25s, border-color 0.25s',
-      }}
-      onMouseEnter={(e) => {
-        const d = e.currentTarget as HTMLDivElement;
-        d.style.boxShadow = '0 0 20px rgba(79,111,174,0.12)';
-        d.style.borderColor = 'rgba(102,132,196,0.3)';
-      }}
-      onMouseLeave={(e) => {
-        const d = e.currentTarget as HTMLDivElement;
-        d.style.boxShadow = 'none';
-        d.style.borderColor = 'var(--border)';
-      }}
+      style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', flex: 1 }}
     >
       <div style={{ width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         {img
           ? <Image src={img} alt={title} width={28} height={28} style={{ objectFit: 'contain' }} />
-          : <span style={{ fontSize: '0.6rem', fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#6684C4' }}>{text}</span>
+          : <span style={{ fontSize: '0.6rem', fontWeight: 'var(--font-black)', fontFamily: 'var(--font-mono)', color: 'var(--accent-bright)' }}>{text}</span>
         }
       </div>
-      <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text)', lineHeight: 1.2 }}>{title}</div>
+      <div style={{ fontSize: '0.78rem', fontWeight: 'var(--font-bold)', color: 'var(--text)', lineHeight: 1.2 }}>{title}</div>
       <div style={{ fontSize: '0.62rem', color: 'var(--text-soft)', lineHeight: 1.3 }}>{subtitle}</div>
-      <div style={{ fontSize: '0.62rem', color: 'var(--accent-bright)', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>{level}%</div>
+      <div style={{ fontSize: '0.62rem', color: 'var(--accent-bright)', fontWeight: 'var(--font-bold)', fontFamily: 'var(--font-mono)' }}>{level}%</div>
       <BarProgress value={level} delay={delay + 0.15} />
-    </motion.div>
+    </Card>
   );
 }
 
 /* ─── Aptitude card ─── */
 function AptCard({ icon: Icon, label, desc, delay = 0 }: typeof aptitudes[number] & { delay?: number }) {
   return (
-    <motion.div
+    <Card
+      padding="md"
+      radius="md"
+      glow="md"
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.35, delay }}
       whileHover={{ y: -3 }}
-      style={{
-        background: 'var(--bg-card)',
-        border: '1px solid var(--border)',
-        borderRadius: '0.875rem',
-        padding: '1rem',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '0.5rem',
-        flex: 1,
-        transition: 'box-shadow 0.25s, border-color 0.25s',
-      }}
-      onMouseEnter={(e) => {
-        const d = e.currentTarget as HTMLDivElement;
-        d.style.boxShadow = '0 0 18px rgba(79,111,174,0.12)';
-        d.style.borderColor = 'rgba(102,132,196,0.25)';
-      }}
-      onMouseLeave={(e) => {
-        const d = e.currentTarget as HTMLDivElement;
-        d.style.boxShadow = 'none';
-        d.style.borderColor = 'var(--border)';
-      }}
+      style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flex: 1 }}
     >
       <div
         style={{
-          width: '36px', height: '36px', borderRadius: '0.5rem',
+          width: '36px', height: '36px', borderRadius: 'var(--radius-sm)',
           background: 'rgba(79,111,174,0.1)', border: '1px solid var(--border)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           color: 'var(--accent-bright)',
@@ -232,9 +182,9 @@ function AptCard({ icon: Icon, label, desc, delay = 0 }: typeof aptitudes[number
       >
         <Icon size={16} />
       </div>
-      <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text)', lineHeight: 1.2 }}>{label}</div>
+      <div style={{ fontSize: '0.8rem', fontWeight: 'var(--font-bold)', color: 'var(--text)', lineHeight: 1.2 }}>{label}</div>
       <p style={{ fontSize: '0.68rem', color: 'var(--text-soft)', lineHeight: 1.5 }}>{desc}</p>
-    </motion.div>
+    </Card>
   );
 }
 
@@ -246,7 +196,7 @@ function CatHeader({ icon: Icon, label }: { icon: React.FC<LucideProps>; label: 
     <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', marginBottom: '1rem' }}>
       <div
         style={{
-          width: '32px', height: '32px', borderRadius: '0.5rem',
+          width: '32px', height: '32px', borderRadius: 'var(--radius-sm)',
           background: 'rgba(79,111,174,0.12)', border: '1px solid var(--border)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           color: 'var(--accent-bright)',
@@ -254,7 +204,7 @@ function CatHeader({ icon: Icon, label }: { icon: React.FC<LucideProps>; label: 
       >
         <Icon size={15} />
       </div>
-      <span style={{ fontSize: '0.78rem', fontWeight: 800, letterSpacing: '0.1em', color: 'var(--text)' }}>{label}</span>
+      <span style={{ fontSize: '0.78rem', fontWeight: 'var(--font-extrabold)', letterSpacing: '0.1em', color: 'var(--text)' }}>{label}</span>
     </div>
   );
 }
@@ -269,10 +219,10 @@ export default function Skills() {
         <div className="skills-header-grid">
           {/* Left: title */}
           <div>
-            <div style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.2em', color: 'var(--accent)', marginBottom: '0.5rem' }}>
+            <div style={{ fontSize: '0.65rem', fontWeight: 'var(--font-bold)', letterSpacing: '0.2em', color: 'var(--accent-bright)', marginBottom: '0.5rem' }}>
               TECNOLOGÍAS
             </div>
-            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05 }}>
+            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', fontWeight: 'var(--font-black)', letterSpacing: '-0.03em', lineHeight: 1.05 }}>
               HABILIDADES
               <br />
               <span className="glow-text">& TECNOLOGÍAS</span>
@@ -297,7 +247,7 @@ export default function Skills() {
               style={{
                 position: 'absolute', top: 0, left: '10%', right: 0,
                 background: 'var(--bg-card)', border: '1px solid var(--border)',
-                borderRadius: '1rem', padding: '1rem',
+                borderRadius: 'var(--radius-lg)', padding: '1rem',
                 fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
                 boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
               }}
@@ -323,13 +273,13 @@ export default function Skills() {
                   key={s.label}
                   style={{
                     background: 'rgba(79,111,174,0.12)', border: '1px solid var(--border)',
-                    borderRadius: '0.625rem', padding: '0.5rem 0.875rem',
+                    borderRadius: 'var(--radius-sm)', padding: '0.5rem 0.875rem',
                     fontSize: '0.65rem', color: 'var(--text-soft)',
                     backdropFilter: 'blur(8px)',
                   }}
                 >
                   <div>{s.label}</div>
-                  <div style={{ fontWeight: 800, color: 'var(--accent-bright)', fontSize: '0.8rem' }}>{s.value}</div>
+                  <div style={{ fontWeight: 'var(--font-extrabold)', color: 'var(--accent-bright)', fontSize: '0.8rem' }}>{s.value}</div>
                 </div>
               ))}
             </div>

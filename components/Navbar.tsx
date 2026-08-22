@@ -36,6 +36,7 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
   return (
     <nav
       className="sidebar"
+      aria-label="Navegación principal"
       style={{
         width: '260px',
         height: '100vh',
@@ -67,7 +68,7 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
             style={{
               position: 'absolute',
               inset: '-14px',
-              borderRadius: '50%',
+              borderRadius: 'var(--radius-full)',
               border: '1px solid rgba(79,111,174,0.25)',
               animation: 'rotateSlow 8s linear infinite',
             }}
@@ -80,9 +81,9 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
                 left: '50%',
                 width: '7px',
                 height: '7px',
-                borderRadius: '50%',
-                background: '#6684C4',
-                boxShadow: '0 0 8px #6684C4',
+                borderRadius: 'var(--radius-full)',
+                background: 'var(--accent-bright)',
+                boxShadow: '0 0 8px var(--accent-bright)',
                 transform: 'translate(-50%, -50%) translateY(-54px)',
               }}
             />
@@ -93,7 +94,7 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
             style={{
               position: 'absolute',
               inset: '-6px',
-              borderRadius: '50%',
+              borderRadius: 'var(--radius-full)',
               border: '1px dashed rgba(102,132,196,0.18)',
               animation: 'rotateSlowReverse 12s linear infinite',
             }}
@@ -104,8 +105,8 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
             style={{
               width: '80px',
               height: '80px',
-              borderRadius: '1.25rem',
-              background: 'linear-gradient(135deg, #0D1322, #4F6FAE)',
+              borderRadius: 'var(--radius-xl)',
+              background: 'linear-gradient(135deg, var(--bg-section), var(--accent))',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -117,7 +118,7 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
             <span
               style={{
                 fontSize: '1.75rem',
-                fontWeight: 900,
+                fontWeight: 'var(--font-black)',
                 fontStyle: 'italic',
                 color: '#fff',
                 letterSpacing: '-0.04em',
@@ -134,7 +135,7 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
           <div
             style={{
               fontSize: '0.9rem',
-              fontWeight: 800,
+              fontWeight: 'var(--font-extrabold)',
               letterSpacing: '0.05em',
               color: 'var(--text)',
             }}
@@ -162,9 +163,9 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
             style={{
               width: '7px',
               height: '7px',
-              borderRadius: '50%',
-              background: '#22c55e',
-              boxShadow: '0 0 8px #22c55e',
+              borderRadius: 'var(--radius-full)',
+              background: 'var(--success)',
+              boxShadow: '0 0 8px var(--success)',
               animation: 'pulseDot 2s ease-in-out infinite',
             }}
           />
@@ -200,12 +201,12 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
                     : 'rgba(255,255,255,0.03)',
                   border: `1px solid ${isActive ? 'rgba(102,132,196,0.35)' : 'rgba(255,255,255,0.06)'}`,
                   borderLeft: `3px solid ${isActive ? 'var(--accent-bright)' : 'transparent'}`,
-                  borderRadius: '0.75rem',
+                  borderRadius: 'var(--radius-md)',
                   color: isActive ? 'var(--text)' : 'var(--text-soft)',
                   fontSize: '0.85rem',
-                  fontWeight: isActive ? 700 : 400,
+                  fontWeight: isActive ? 'var(--font-bold)' : 'var(--font-regular)',
                   cursor: 'pointer',
-                  transition: 'all 0.2s',
+                  transition: 'all var(--duration-base) var(--ease-standard)',
                   textAlign: 'left',
                 }}
                 onMouseEnter={(e) => {
@@ -230,7 +231,7 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
                   style={{
                     width: '32px',
                     height: '32px',
-                    borderRadius: '0.5rem',
+                    borderRadius: 'var(--radius-sm)',
                     background: isActive
                       ? 'rgba(79,111,174,0.25)'
                       : 'rgba(255,255,255,0.05)',
@@ -239,7 +240,7 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
                     justifyContent: 'center',
                     color: isActive ? 'var(--accent-bright)' : 'inherit',
                     flexShrink: 0,
-                    transition: 'background 0.2s',
+                    transition: 'background var(--duration-base) var(--ease-standard)',
                   }}
                 >
                   <Icon size={15} />
@@ -250,7 +251,7 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
                 <ChevronRight
                   size={14}
                   style={{
-                    color: isActive ? 'var(--accent-bright)' : 'rgba(255,255,255,0.2)',
+                    color: isActive ? 'var(--accent-bright)' : 'var(--text-muted)',
                     flexShrink: 0,
                   }}
                 />
@@ -271,14 +272,14 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
             padding: '0.875rem 1rem',
             background: 'rgba(79,111,174,0.08)',
             border: '1px solid rgba(79,111,174,0.16)',
-            borderRadius: '0.875rem',
+            borderRadius: 'var(--radius-md)',
           }}
         >
           <div
             style={{
               width: '36px',
               height: '36px',
-              borderRadius: '50%',
+              borderRadius: 'var(--radius-full)',
               background: 'rgba(79,111,174,0.2)',
               border: '1px solid rgba(102,132,196,0.25)',
               display: 'flex',
@@ -291,7 +292,7 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
             <Rocket size={16} />
           </div>
           <div>
-            <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text)', lineHeight: 1.3 }}>
+            <div style={{ fontSize: '0.75rem', fontWeight: 'var(--font-bold)', color: 'var(--text)', lineHeight: 1.3 }}>
               Construyendo soluciones eficientes
             </div>
             <div style={{ fontSize: '0.62rem', color: 'var(--text-soft)', marginTop: '0.2rem' }}>
@@ -300,8 +301,12 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
           </div>
         </div>
 
-        {/* Dark mode toggle (decorative) */}
-        <div
+        {/* Dark mode toggle */}
+        <button
+          onClick={toggleTheme}
+          role="switch"
+          aria-checked={theme === 'dark'}
+          aria-label="Cambiar tema"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -309,28 +314,29 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
             padding: '0.75rem 1rem',
             background: 'rgba(255,255,255,0.03)',
             border: '1px solid rgba(255,255,255,0.06)',
-            borderRadius: '0.75rem',
+            borderRadius: 'var(--radius-md)',
+            cursor: 'pointer',
+            width: '100%',
+            textAlign: 'left',
           }}
         >
           <Moon size={15} style={{ color: 'var(--text-soft)' }} />
           <span style={{ fontSize: '0.8rem', color: 'var(--text-soft)', flex: 1 }}>
             {theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
           </span>
-          {/* Toggle switch */}
+          {/* Toggle switch (visual) */}
           <div
-            onClick={toggleTheme}
             style={{
               width: '36px',
               height: '20px',
-              borderRadius: '99px',
+              borderRadius: 'var(--radius-full)',
               background: theme === 'dark'
                 ? 'linear-gradient(135deg, var(--accent), var(--accent-bright))'
                 : 'rgba(200,200,200,0.4)',
               position: 'relative',
-              cursor: 'pointer',
               flexShrink: 0,
               boxShadow: theme === 'dark' ? '0 0 10px rgba(79,111,174,0.32)' : 'none',
-              transition: 'background 0.25s',
+              transition: 'background var(--duration-base) var(--ease-standard)',
             }}
           >
             <div
@@ -341,13 +347,13 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
                 top: '3px',
                 width: '14px',
                 height: '14px',
-                borderRadius: '50%',
+                borderRadius: 'var(--radius-full)',
                 background: '#fff',
-                transition: 'left 0.25s, right 0.25s',
+                transition: 'left var(--duration-base) var(--ease-standard), right var(--duration-base) var(--ease-standard)',
               }}
             />
           </div>
-        </div>
+        </button>
 
         {/* Copyright */}
         <div
@@ -355,7 +361,7 @@ export default function Navbar({ activeSection, onNavigate }: Props) {
             textAlign: 'center',
             padding: '0.5rem 0',
             fontSize: '0.6rem',
-            color: 'rgba(255,255,255,0.25)',
+            color: 'var(--text-muted)',
             lineHeight: 1.6,
           }}
         >
