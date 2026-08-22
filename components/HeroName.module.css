@@ -9,8 +9,8 @@
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  background: rgba(16, 185, 129, 0.06);
-  border: 1px solid rgba(16, 185, 129, 0.22);
+  background: rgba(78, 142, 247, 0.06);
+  border: 1px solid rgba(78, 142, 247, 0.22);
   border-radius: 100px;
   padding: 6px 16px;
   font-size: 12px;
@@ -25,7 +25,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #10b981;
+  background: #4e8ef7;
   flex-shrink: 0;
   animation: pulseDot 2.2s ease-out infinite;
 }
@@ -55,7 +55,7 @@
 }
 
 .green {
-  color: #10b981;
+  color: #4e8ef7;
 }
 
 /* Applied by JS to trigger a single flip cycle */
@@ -89,9 +89,9 @@
 }
 
 @keyframes pulseDot {
-  0%   { box-shadow: 0 0 0 0   rgba(16, 185, 129, 0.55); }
-  65%  { box-shadow: 0 0 0 7px rgba(16, 185, 129, 0);    }
-  100% { box-shadow: 0 0 0 0   rgba(16, 185, 129, 0);    }
+  0%   { box-shadow: 0 0 0 0   rgba(78, 142, 247, 0.55); }
+  65%  { box-shadow: 0 0 0 7px rgba(78, 142, 247, 0);    }
+  100% { box-shadow: 0 0 0 0   rgba(78, 142, 247, 0);    }
 }
 
 @keyframes fadeIn {

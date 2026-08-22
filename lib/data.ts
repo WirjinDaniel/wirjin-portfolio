@@ -14,6 +14,7 @@ export interface Project {
   fillLabel: string;
   tags: string[];
   image?: string;
+  highlights?: string[];
 }
 
 export interface StackGroup {
@@ -91,6 +92,13 @@ export const projects: Project[] = [
     fillLabel: 'Adopción institucional',
     tags: ['Next.js', 'Django REST', 'SQL Server', 'LDAP/AD', 'Celery + Redis'],
     image: '/Viaticos dashordad .png',
+    highlights: [
+      'Flujo de 4 etapas: Contabilidad → Presupuesto → Auditoría → Tesorería',
+      'Autenticación con LDAP / Active Directory institucional',
+      'Notificaciones automáticas por correo en cada cambio de estado',
+      'Panel de auditoría con historial completo por expediente',
+      'Control de acceso granular por rol y departamento',
+    ],
   },
   {
     name: 'Sistema de Inventario/POS',
@@ -102,6 +110,13 @@ export const projects: Project[] = [
     fillLabel: 'Avance del roadmap',
     tags: ['Django REST', 'Celery Beat', 'QR', 'Producto multi-cliente'],
     image: '/investario.png',
+    highlights: [
+      'Registro y depreciación automática de activos fijos',
+      'Trazabilidad por código QR generado por el sistema',
+      'Arquitectura multi-cliente (multi-tenant) desde el diseño',
+      'Celery Beat para tareas programadas de depreciación mensual',
+      'API REST reutilizable desde la base del sistema de viáticos',
+    ],
   },
 ];
 

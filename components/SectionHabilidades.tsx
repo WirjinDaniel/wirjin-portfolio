@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useSectionParallax } from '@/hooks/useSectionParallax';
 import { skills, languages, aptitudes } from '@/lib/data';
 
 function SkillBar({ name, level, delay = 0 }: { name: string; level: number; delay?: number }) {
@@ -52,9 +53,10 @@ const chipVariants = {
 
 export default function SectionHabilidades() {
   const headRef = useScrollReveal();
+  const sectionRef = useSectionParallax();
 
   return (
-    <section id="habilidades">
+    <section id="habilidades" ref={sectionRef as React.Ref<HTMLElement>}>
       <div className="wrap">
         <div className="sec-head reveal" ref={headRef as React.Ref<HTMLDivElement>}>
           <h2>Habilidades</h2>
