@@ -1,10 +1,16 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { ArrowRight, Download, ChevronDown, Briefcase, Star } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Button from '@/components/Button';
+
+const cvOptions = [
+  { label: 'Español', href: '/Wirjin Sanchez (1).pdf' },
+  { label: 'English', href: '/Wirjin Sanchez CV l (English).pdf' },
+];
 
 const HeroGlobe = dynamic(() => import('@/components/HeroGlobe'), { ssr: false });
 
@@ -23,6 +29,27 @@ const techStack = [
 ];
 
 export default function Hero({ onNavigate }: Props) {
+  const [showCvMenu, setShowCvMenu] = useState(false);
+  const cvMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!showCvMenu) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (cvMenuRef.current && !cvMenuRef.current.contains(e.target as Node)) {
+        setShowCvMenu(false);
+      }
+    };
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setShowCvMenu(false);
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [showCvMenu]);
+
   return (
     <section
       id="inicio"
@@ -112,9 +139,68 @@ export default function Hero({ onNavigate }: Props) {
             Ver mis proyectos <ArrowRight size={15} />
           </Button>
 
-          <Button variant="ghost" href="/Wirjin Sanchez (1).pdf" download>
-            Descargar CV <Download size={15} />
-          </Button>
+          <div ref={cvMenuRef} style={{ position: 'relative' }}>
+            <Button
+              variant="ghost"
+              onClick={() => setShowCvMenu((v) => !v)}
+              aria-haspopup="menu"
+              aria-expanded={showCvMenu}
+            >
+              Descargar CV <Download size={15} />
+            </Button>
+
+            <AnimatePresence>
+              {showCvMenu && (
+                <motion.div
+                  role="menu"
+                  initial={{ opacity: 0, y: -6, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -6, scale: 0.97 }}
+                  transition={{ duration: 0.15 }}
+                  style={{
+                    position: 'absolute',
+                    top: 'calc(100% + 0.5rem)',
+                    left: 0,
+                    zIndex: 20,
+                    minWidth: '160px',
+                    background: 'var(--bg-elevated, #0d1525)',
+                    border: '1px solid var(--border)',
+                    borderRadius: 'var(--radius-md)',
+                    boxShadow: '0 8px 30px rgba(0,0,0,0.5)',
+                    overflow: 'hidden',
+                  }}
+                >
+                  {cvOptions.map(({ label, href }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      download
+                      role="menuitem"
+                      onClick={() => setShowCvMenu(false)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                        padding: '0.65rem 1rem',
+                        fontSize: '0.82rem',
+                        color: 'var(--text)',
+                        textDecoration: 'none',
+                        transition: 'background var(--duration-base) var(--ease-standard)',
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLElement).style.background = 'rgba(79,111,174,0.12)';
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLElement).style.background = 'transparent';
+                      }}
+                    >
+                      {label}
+                    </a>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </motion.div>
 
         {/* ── Mobile-only: available badge ── */}
