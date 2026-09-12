@@ -4,13 +4,6 @@
 - Node.js 18+
 - npm
 
-## Desarrollo local
-```bash
-npm install
-npm run dev
-```
-Abre http://localhost:3000.
-
 ## Editar el contenido
 Todo el contenido del portafolio esta en un solo archivo:
 
